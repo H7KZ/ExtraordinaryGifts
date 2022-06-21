@@ -1,4 +1,4 @@
-package cz.kominekjan.extraordinarygifts.config;
+package cz.kominekjan.extraordinarygifts.databases;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -6,14 +6,15 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
-public class InitConfig {
+public class GiftStorage {
     private static File file;
     private static FileConfiguration customFile;
 
     public static void setup() {
 
-        file = new File(Bukkit.getServer().getPluginManager().getPlugin("ExtraordinaryGifts").getDataFolder(), "ExtraordinaryGifts.yml");
+        file = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("ExtraordinaryGifts")).getDataFolder(), "ExtraordinaryGifts.yml");
 
         if (!file.exists()) {
             try {
