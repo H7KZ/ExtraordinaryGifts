@@ -1,0 +1,7 @@
+name: ExtraordinaryGifts
+version: '${version}'
+main: cz.kominekjan.extraordinarygifts.ExtraordinaryGifts
+api-version: 1.19
+authors: [ Jan_Kominek ]
+description: Plugin that makes sending gifts possible. It has built GUI and mailing system with local yaml database. It is the perfect option for survival servers that want to spice up their gameplay.
+website: https://kominekjan.cz/
