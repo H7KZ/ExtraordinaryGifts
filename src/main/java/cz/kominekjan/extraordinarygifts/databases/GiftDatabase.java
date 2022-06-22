@@ -8,13 +8,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public class GiftStorage {
+import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
+
+public class GiftDatabase {
     private static File file;
-    private static FileConfiguration customFile;
+    private static FileConfiguration giftDatabaseFile;
 
     public static void setup() {
 
-        file = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("ExtraordinaryGifts")).getDataFolder(), "ExtraordinaryGifts.yml");
+        String filePath = Objects.requireNonNull(config.getString("database.path"));
+
+        file = new File(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("ExtraordinaryGifts")).getDataFolder(), filePath);
 
         if (!file.exists()) {
             try {
@@ -24,23 +28,23 @@ public class GiftStorage {
             }
         }
 
-        customFile = YamlConfiguration.loadConfiguration(file);
+        giftDatabaseFile = YamlConfiguration.loadConfiguration(file);
 
     }
 
     public static FileConfiguration get() {
-        return customFile;
+        return giftDatabaseFile;
     }
 
     public static void save() {
         try {
-            customFile.save(file);
+            giftDatabaseFile.save(file);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
     public static void reload() {
-        customFile = YamlConfiguration.loadConfiguration(file);
+        giftDatabaseFile = YamlConfiguration.loadConfiguration(file);
     }
 }

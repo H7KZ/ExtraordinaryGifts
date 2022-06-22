@@ -6,8 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static cz.kominekjan.extraordinarygifts.messages.errors.notEnoughArgs;
-import static cz.kominekjan.extraordinarygifts.messages.errors.youMustBeAPlayer;
+import static cz.kominekjan.extraordinarygifts.messages.Errors.notEnoughArgs;
+import static cz.kominekjan.extraordinarygifts.messages.Errors.youMustBeAPlayer;
 
 public class Commands implements CommandExecutor {
 

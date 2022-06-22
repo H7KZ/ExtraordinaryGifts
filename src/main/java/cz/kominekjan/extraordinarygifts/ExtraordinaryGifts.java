@@ -1,24 +1,17 @@
 package cz.kominekjan.extraordinarygifts;
 
-import cz.kominekjan.extraordinarygifts.commands.Commands;
-import cz.kominekjan.extraordinarygifts.databases.GiftStorage;
+import cz.kominekjan.extraordinarygifts.databases.GiftDatabase;
 import cz.kominekjan.extraordinarygifts.initialize.Initialize;
 import cz.kominekjan.extraordinarygifts.messages.Disable;
 import cz.kominekjan.extraordinarygifts.messages.Enable;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Objects;
-
 public final class ExtraordinaryGifts extends JavaPlugin {
 
     public static ExtraordinaryGifts plugin;
 
     public static FileConfiguration config;
-
-    public static final String ANSI_CYAN = "\u001B[36m";
-
-    public static final String ANSI_RESET = "\u001B[0m";
 
     @Override
     public void onEnable() {
@@ -28,14 +21,18 @@ public final class ExtraordinaryGifts extends JavaPlugin {
         plugin = this;
 
         //CONFIG FILE LOAD & COPY DEFAULTS
-        Initialize.loadConfig();
-        config = Initialize.config;
+        config = plugin.getConfig();
+        config.options().copyDefaults(true);
+        saveConfig();
 
-        //STORAGE SETUP & LOAD
-        Initialize.loadStorage();
+        //GIFT DATABASE SETUP & LOAD
+        Initialize.database();
 
         //COMMAND REGISTERING
-        Initialize.registerCommands();
+        Initialize.commands();
+
+        //ITEMS LOADING
+        Initialize.items();
 
         //ENDING OF START
         Enable.closing();
@@ -46,11 +43,8 @@ public final class ExtraordinaryGifts extends JavaPlugin {
         //SHUTTING DOWN
         Disable.starting();
 
-        //CONFIG FILE SAVE
-        Initialize.saveConfig();
-
-        //STORAGE SAVE
-        Initialize.saveStorage();
+        //GIFT DATABASE FILE SAVE
+        GiftDatabase.save();
 
         //ENDING OF SHUTDOWN
         Disable.closing();
