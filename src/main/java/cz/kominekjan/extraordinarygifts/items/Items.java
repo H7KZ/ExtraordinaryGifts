@@ -10,10 +10,10 @@ public class Items {
     public static ItemStack giftMenuRedGlassPane;
 
     public static void init() {
-        giftMenuGrayGlassPane = Item.create(Material.GRAY_STAINED_GLASS_PANE, " ", null, false);
+        giftMenuGrayGlassPane = Item.create(Material.GRAY_STAINED_GLASS_PANE, " ", null, false, "neutral", "neutral");
 
-        giftMenuGreenGlassPane = Item.create(Material.GREEN_STAINED_GLASS_PANE, ChatColor.GREEN + "" + ChatColor.BOLD + "Create gift", null, true);
+        giftMenuGreenGlassPane = Item.create(Material.GREEN_STAINED_GLASS_PANE, ChatColor.GREEN + "" + ChatColor.BOLD + "Create gift", null, true, "accept", "accept");
 
-        giftMenuRedGlassPane = Item.create(Material.RED_STAINED_GLASS_PANE, ChatColor.RED + "" + ChatColor.BOLD + "Cancel", null, true);
+        giftMenuRedGlassPane = Item.create(Material.RED_STAINED_GLASS_PANE, ChatColor.RED + "" + ChatColor.BOLD + "Cancel", null, true, "cancel", "cancel");
     }
 }

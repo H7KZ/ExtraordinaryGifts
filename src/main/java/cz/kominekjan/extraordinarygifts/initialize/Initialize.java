@@ -3,6 +3,7 @@ package cz.kominekjan.extraordinarygifts.initialize;
 import cz.kominekjan.extraordinarygifts.ExtraordinaryGifts;
 import cz.kominekjan.extraordinarygifts.commands.Commands;
 import cz.kominekjan.extraordinarygifts.databases.GiftDatabase;
+import cz.kominekjan.extraordinarygifts.events.GiftMenuEvent;
 import cz.kominekjan.extraordinarygifts.items.Items;
 import cz.kominekjan.extraordinarygifts.messages.Colors;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -31,5 +32,10 @@ public class Initialize {
     public static void items() {
         Items.init();
         System.out.println(ANSI_CYAN + "-- ExtraordinaryGifts items have been loaded --" + ANSI_RESET);
+    }
+
+    public static void events() {
+        plugin.getServer().getPluginManager().registerEvents(new GiftMenuEvent(), plugin);
+        System.out.println(ANSI_CYAN + "-- ExtraordinaryGifts events have been registered --" + ANSI_RESET);
     }
 }

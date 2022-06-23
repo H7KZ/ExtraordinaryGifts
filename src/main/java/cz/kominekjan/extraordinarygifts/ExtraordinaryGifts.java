@@ -34,6 +34,9 @@ public final class ExtraordinaryGifts extends JavaPlugin {
         //ITEMS LOADING
         Initialize.items();
 
+        //EVENT REGISTERING
+        Initialize.events();
+
         //ENDING OF START
         Enable.closing();
     }

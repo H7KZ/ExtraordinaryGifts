@@ -7,6 +7,6 @@ public class MailCommand {
     public static final String commandName = "mail";
 
     public static void command(Player p) {
-
+        
     }
 }
