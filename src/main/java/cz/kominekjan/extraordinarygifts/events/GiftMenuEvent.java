@@ -4,6 +4,7 @@ import cz.kominekjan.extraordinarygifts.gift.Gift;
 import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.items.Items;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -33,16 +34,22 @@ public class GiftMenuEvent implements Listener {
     private static final ItemStack[] giftMenuRemoveItems = {
             Items.giftMenuGrayGlassPane,
             Items.giftMenuGreenGlassPane,
-            Items.giftMenuRedGlassPane,
-            null
+            Items.giftMenuRedGlassPane
     };
 
     private static void cancel(InventoryCloseEvent e) {
+        Player p = (Player) e.getPlayer();
         for (ItemStack item : e.getInventory().getContents()) {
-            if (!Arrays.asList(giftMenuRemoveItems).contains(item) && item != null) {
-                System.out.println(item);
-                e.getPlayer().getInventory().addItem(item);
+            if (Arrays.asList(giftMenuRemoveItems).contains(item) || item == null) {
+                continue;
             }
+
+            if (p.getInventory().firstEmpty() == -1) {
+                p.getWorld().dropItem(p.getLocation(), item);
+                continue;
+            }
+
+            p.getInventory().addItem(item);
         }
     }
 
