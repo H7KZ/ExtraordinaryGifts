@@ -16,7 +16,7 @@ public class HelpCommand {
 
     public static void command(Player p) {
         p.sendMessage(ChatColor.GOLD + "-- ExtraordinaryGifts help: --");
-        for (String c: contents) {
+        for (String c : contents) {
             String[] command = c.split(":");
             p.sendMessage(ChatColor.GOLD + command[0] + ":" + ChatColor.WHITE + command[1]);
         }

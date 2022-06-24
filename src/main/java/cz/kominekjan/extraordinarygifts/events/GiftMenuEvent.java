@@ -7,6 +7,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -28,6 +29,22 @@ public class GiftMenuEvent implements Listener {
     private static final ItemStack[] giftMenuCancelItem = {
             Items.giftMenuRedGlassPane,
     };
+
+    private static final ItemStack[] giftMenuRemoveItems = {
+            Items.giftMenuGrayGlassPane,
+            Items.giftMenuGreenGlassPane,
+            Items.giftMenuRedGlassPane,
+            null
+    };
+
+    private static void cancel(InventoryCloseEvent e) {
+        for (ItemStack item : e.getInventory().getContents()) {
+            if (!Arrays.asList(giftMenuRemoveItems).contains(item) && item != null) {
+                System.out.println(item);
+                e.getPlayer().getInventory().addItem(item);
+            }
+        }
+    }
 
     @EventHandler
     public void onGiftMenuClick(InventoryClickEvent e) {
@@ -70,13 +87,20 @@ public class GiftMenuEvent implements Listener {
 
             assert currentItem != null;
             if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("cancel")) {
-                cancel();
                 e.setCancelled(true);
+                e.getWhoClicked().closeInventory();
             }
         }
     }
 
-    private static void cancel() {
+    @EventHandler
+    public void onGiftMenuClose(InventoryCloseEvent e) {
+        if (Objects.requireNonNull(e.getInventory()).getHolder() == null) {
+            return;
+        }
 
+        if (e.getInventory().getHolder() instanceof GiftMenu) {
+            cancel(e);
+        }
     }
 }

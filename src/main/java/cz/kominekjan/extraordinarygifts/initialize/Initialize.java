@@ -6,14 +6,12 @@ import cz.kominekjan.extraordinarygifts.databases.GiftDatabase;
 import cz.kominekjan.extraordinarygifts.events.GiftMenuEvent;
 import cz.kominekjan.extraordinarygifts.items.Items;
 import cz.kominekjan.extraordinarygifts.messages.Colors;
-import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Objects;
 
 public class Initialize {
     private static final ExtraordinaryGifts plugin = ExtraordinaryGifts.plugin;
 
-    public static FileConfiguration config;
     private static final String ANSI_CYAN = Colors.ANSI_CYAN;
 
     private static final String ANSI_RESET = Colors.ANSI_CYAN;
