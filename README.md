@@ -1,2 +1,2 @@
 # ExtraordinaryGifts
- Plugin that makes sending gifts possible. It has built GUI and mailing system with local yaml database. It is the perfect option for survival servers that want to spice up their gameplay.
+ Plugin that makes implements gift sending. It has built-in GUI and mailing system with local YAML database. It is the perfect solution for survival servers that want to spice up their gameplay with user-to-user interaction.
