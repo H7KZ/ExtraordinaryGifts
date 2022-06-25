@@ -26,5 +26,15 @@
       <option name="name" value="sonatype" />
       <option name="url" value="https://oss.sonatype.org/content/groups/public/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="mvnrepository" />
+      <option name="name" value="mvnrepository" />
+      <option name="url" value="https://mvnrepository.com/artifact/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="velocity" />
+      <option name="name" value="velocity" />
+      <option name="url" value="https://nexus.velocitypowered.com/repository/maven-public/" />
+    </remote-repository>
   </component>
 </project>

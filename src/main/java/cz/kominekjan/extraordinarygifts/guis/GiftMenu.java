@@ -3,7 +3,6 @@ package cz.kominekjan.extraordinarygifts.guis;
 import cz.kominekjan.extraordinarygifts.items.Items;
 import cz.kominekjan.extraordinarygifts.messages.Errors;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -12,10 +11,9 @@ import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 
 public class GiftMenu implements InventoryHolder {
     private final Inventory giftMenuInv;
-
-    private final ItemStack neutralGlassPanel = Items.giftMenuGrayGlassPane;
-    private final ItemStack acceptGlassPanel = Items.giftMenuGreenGlassPane;
-    private final ItemStack cancelGlassPanel = Items.giftMenuRedGlassPane;
+    private final ItemStack neutralGlassPanel = Items.giftMenuNeutral;
+    private final ItemStack acceptGlassPanel = Items.giftMenuAccept;
+    private final ItemStack cancelGlassPanel = Items.giftMenuCancel;
 
     public GiftMenu() {
         int invSize = config.getInt("giftInventory.size");
@@ -33,7 +31,7 @@ public class GiftMenu implements InventoryHolder {
 
         int fullInvSize = correctInvSize + 9;
 
-        giftMenuInv = Bukkit.createInventory(this, fullInvSize, ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Gift Menu");
+        giftMenuInv = Bukkit.createInventory(this, fullInvSize, "Gift Menu");
         initialize(invSize, correctInvSize, fullInvSize);
     }
 

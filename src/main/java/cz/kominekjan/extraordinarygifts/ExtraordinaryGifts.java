@@ -23,7 +23,7 @@ public final class ExtraordinaryGifts extends JavaPlugin {
         //CONFIG FILE LOAD & COPY DEFAULTS
         config = plugin.getConfig();
         config.options().copyDefaults(true);
-        saveConfig();
+        saveDefaultConfig();
 
         //GIFT DATABASE SETUP & LOAD
         Initialize.database();

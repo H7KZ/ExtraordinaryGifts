@@ -1,6 +1,7 @@
 package cz.kominekjan.extraordinarygifts.events;
 
-import cz.kominekjan.extraordinarygifts.gift.Gift;
+import cz.kominekjan.extraordinarygifts.databases.GiftMap;
+import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.items.Items;
 import org.bukkit.NamespacedKey;
@@ -12,30 +13,44 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 
 public class GiftMenuEvent implements Listener {
 
+    private static final Map<UUID, Boolean> receiveItems = new HashMap<>();
     private static final ItemStack[] giftMenuNeutralItems = {
-            Items.giftMenuGrayGlassPane,
+            Items.giftMenuNeutral,
     };
 
     private static final ItemStack[] giftMenuAcceptItem = {
-            Items.giftMenuGreenGlassPane,
+            Items.giftMenuAccept,
     };
 
     private static final ItemStack[] giftMenuCancelItem = {
-            Items.giftMenuRedGlassPane,
+            Items.giftMenuCancel,
     };
 
     private static final ItemStack[] giftMenuRemoveItems = {
-            Items.giftMenuGrayGlassPane,
-            Items.giftMenuGreenGlassPane,
-            Items.giftMenuRedGlassPane
+            Items.giftMenuNeutral,
+            Items.giftMenuAccept,
+            Items.giftMenuCancel
     };
+
+    private static ArrayList<ItemStack> removeGiftMenuItems(ItemStack[] items) {
+        ArrayList<ItemStack> result = new ArrayList<>();
+
+        for (ItemStack item : items) {
+            if (Arrays.asList(giftMenuRemoveItems).contains(item) || item == null) {
+                continue;
+            }
+
+            result.add(item);
+        }
+
+        return result;
+    }
 
     private static void cancel(InventoryCloseEvent e) {
         Player p = (Player) e.getPlayer();
@@ -84,7 +99,9 @@ public class GiftMenuEvent implements Listener {
 
             assert currentItem != null;
             if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("accept")) {
-                Gift.create(e.getInventory());
+                GiftMap.temporary.put(e.getWhoClicked().getUniqueId(), removeGiftMenuItems(e.getInventory().getContents()));
+                GiftAppearanceMenu giftAppearanceMenu = new GiftAppearanceMenu();
+                e.getWhoClicked().openInventory(giftAppearanceMenu.getInventory());
                 e.setCancelled(true);
             }
         }
@@ -94,6 +111,7 @@ public class GiftMenuEvent implements Listener {
 
             assert currentItem != null;
             if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("cancel")) {
+                receiveItems.put(e.getWhoClicked().getUniqueId(), true);
                 e.setCancelled(true);
                 e.getWhoClicked().closeInventory();
             }
@@ -106,7 +124,8 @@ public class GiftMenuEvent implements Listener {
             return;
         }
 
-        if (e.getInventory().getHolder() instanceof GiftMenu) {
+        if (e.getInventory().getHolder() instanceof GiftMenu && receiveItems.get(e.getPlayer().getUniqueId()) != null) {
+            receiveItems.remove(e.getPlayer().getUniqueId());
             cancel(e);
         }
     }

@@ -15,10 +15,16 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
+    maven {
+        name = 'velocity'
+        url = 'https://nexus.velocitypowered.com/repository/maven-public/'
+    }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT'
+    // https://mvnrepository.com/artifact/com.mojang/authlib
+    compileOnly 'com.mojang:authlib:3.5.41'
 }
 
 def targetJavaVersion = 17

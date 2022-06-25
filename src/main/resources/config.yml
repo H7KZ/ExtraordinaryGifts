@@ -18,24 +18,71 @@
 # ****----------------------------------------------****
 # **                   GIFT DATABASE                  **
 # ****----------------------------------------------****
-
 "database":
-
   # Path to the database file
   #        ˘folder˘        ˘file˘
   "path": "database/ExtraordinaryGifts.yml"
-
-# ------------------------------------------------------
-
 
 
 # ****----------------------------------------------****
 # **              CUSTOM GIFT INVENTORY               **
 # ****----------------------------------------------****
-
 "giftInventory":
-
+  "title": "§5§lGift Menu"
   # Size of the inventory (number of slots from 1 to 27)
+  # If you set the size to lesser than 1 or greater than 27, the size will be set to default size of 27.
   "size": 27
+  "gui":
+    "acceptButton":
+      "material": "GREEN_STAINED_GLASS_PANE"
+      "text": "§a§lSelect appearance"
+      "enchanted": true
+    "cancelButton":
+      "material": "RED_STAINED_GLASS_PANE"
+      "text": "§c§lCancel"
+      "enchanted": true
+    "neutral":
+      "material": "GRAY_STAINED_GLASS_PANE"
+      "text": " "
+      "enchanted": false
 
-# ------------------------------------------------------
+
+# ****----------------------------------------------****
+# **                 GIFT APPEARANCE                  **
+# ****----------------------------------------------****
+"giftAppearance":
+  # Name of the gift you will receive on creation
+  "title": "§5§lSelect a gift appearance"
+  # UUID of textures for the gifts
+  # Array of UUIDs of textures for the gifts. Maximal number of textures/UUID is 45
+  # When you have more than 45 textures, there won't be more than 45 textures in the gift
+  # If array is empty, there will be set a default texture: "5726d9d0632e40bda5bcf65839ba2cc98a87bd619c53adf00310d6fc71f042b5" (red gift)
+  "items":
+    - "name": "§c§lRed gift"
+      "texture": "df5898ad54e634c59fab5b284d49b3e25d015512caa3ab5620cecf00b84f1345"
+    - "name": "§a§lGreen gift"
+      "texture": "5726d9d0632e40bda5bcf65839ba2cc98a87bd619c53adf00310d6fc71f042b5"
+    - "name": "§e§lBlue gift"
+      "texture": "b0b45cbfbdfb6dc6694de96d97da36ae7b5fe3cd94a5b26250554c5f022ca7d0"
+    - "name": "§d§lYellow gift"
+      "texture": "5726d9d0632e40bda5bcf65839ba2cc98a87bd619c53adf00310d6fc71f042b5"
+    - "name": "§b§lPurple gift"
+      "texture": "1375061d08f1d7b317675aa7fa8800d6f2066e018d9f91ecddf9caf304e97e92"
+  "gui":
+    "acceptButton":
+      "material": "GREEN_STAINED_GLASS_PANE"
+      "text": "§a§lCreate a gift"
+      "enchanted": true
+    "cancelButton":
+      "material": "RED_STAINED_GLASS_PANE"
+      "text": "§c§lCancel"
+      "enchanted": true
+    "neutral":
+      "material": "GRAY_STAINED_GLASS_PANE"
+      "text": " "
+      "enchanted": false
+  "itemSettings":
+    "name": "§6Extraordinary Gift"
+    "lore":
+      - "§dThis is a gift from Extraordinary Gifts."
+      - "§eIt is a gift from Extraordinary Gifts."
