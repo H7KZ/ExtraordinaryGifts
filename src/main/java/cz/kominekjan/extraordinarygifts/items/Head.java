@@ -38,9 +38,7 @@ public class Head {
 
         GameProfile profile = new GameProfile(UUID.randomUUID(), null);
 
-        String url = "https:///textures.minecraft.net/texture/" + uuid;
-
-        profile.getProperties().put("textures", new Property("textures", url));
+        profile.getProperties().put("textures", new Property("textures", uuid));
 
         Field profileField;
 

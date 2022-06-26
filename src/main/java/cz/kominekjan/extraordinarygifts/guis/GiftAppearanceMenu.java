@@ -21,7 +21,7 @@ public class GiftAppearanceMenu implements InventoryHolder {
         if (gifts.size() < 9) {
             navbarSize = gifts.size() + (9 - gifts.size());
         } else {
-            navbarSize = gifts.size() % 9 == 0 ? gifts.size() : gifts.size() + (gifts.size() % 9);
+            navbarSize = gifts.size() % 9 == 0 ? gifts.size() : gifts.size() + (9 - (gifts.size() % 9));
         }
 
         int fullInvSize = navbarSize + 9;

@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -68,6 +69,14 @@ public class GiftMenuEvent implements Listener {
         }
     }
 
+    private static Boolean isGiftEmpty(Inventory inv) {
+        ArrayList<ItemStack> items = new ArrayList<>(Arrays.asList(inv.getContents()));
+
+        items.removeIf(item -> Arrays.asList(giftMenuRemoveItems).contains(item) || item == null);
+
+        return items.isEmpty();
+    }
+
     @EventHandler
     public void onGiftMenuClick(InventoryClickEvent e) {
 
@@ -97,12 +106,17 @@ public class GiftMenuEvent implements Listener {
         if (Arrays.asList(giftMenuAcceptItem).contains(currentItem)) {
             NamespacedKey key = new NamespacedKey(plugin, "accept");
 
+            if (isGiftEmpty(e.getInventory())) {
+                e.setCancelled(true);
+                return;
+            }
+
             assert currentItem != null;
             if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("accept")) {
+                e.setCancelled(true);
                 GiftMap.temporary.put(e.getWhoClicked().getUniqueId(), removeGiftMenuItems(e.getInventory().getContents()));
                 GiftAppearanceMenu giftAppearanceMenu = new GiftAppearanceMenu();
                 e.getWhoClicked().openInventory(giftAppearanceMenu.getInventory());
-                e.setCancelled(true);
             }
         }
 
@@ -111,8 +125,8 @@ public class GiftMenuEvent implements Listener {
 
             assert currentItem != null;
             if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("cancel")) {
-                receiveItems.put(e.getWhoClicked().getUniqueId(), true);
                 e.setCancelled(true);
+                receiveItems.put(e.getWhoClicked().getUniqueId(), true);
                 e.getWhoClicked().closeInventory();
             }
         }

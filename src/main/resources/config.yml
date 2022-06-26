@@ -56,18 +56,28 @@
   # UUID of textures for the gifts
   # Array of UUIDs of textures for the gifts. Maximal number of textures/UUID is 45
   # When you have more than 45 textures, there won't be more than 45 textures in the gift
-  # If array is empty, there will be set a default texture: "5726d9d0632e40bda5bcf65839ba2cc98a87bd619c53adf00310d6fc71f042b5" (red gift)
+  # If array is empty, there will be set a default texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTcyNmQ5ZDA2MzJlNDBiZGE1YmNmNjU4MzliYTJjYzk4YTg3YmQ2MTljNTNhZGYwMDMxMGQ2ZmM3MWYwNDJiNSJ9fX0" (red gift)
   "items":
+    - "name": "§3§lCyan gift"
+      "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGY1ODk4YWQ1NGU2MzRjNTlmYWI1YjI4NGQ0OWIzZTI1ZDAxNTUxMmNhYTNhYjU2MjBjZWNmMDBiODRmMTM0NSJ9fX0="
+    - "name": "§9§lBlue gift"
+      "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTEyZTk0NTFjZGIxOTZiNzgxOTVhOGYwYTRiOWMxYzBhMDRmNTgyNzg4NzkyN2I2YTgyYWFkMzljYWIyZjQzMCJ9fX0="
+    - "name": "§6§lGold gift"
+      "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmI0Y2RlMTZhNDAxNGRlMGE3NjUxZjYwNjdmMTI2OTViYjVmZWQ2ZmVhZWMxZTk0MTNjYTQyNzFlN2M4MTkifX19"
+    - "name": "§2§lGreen gift"
+      "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Y0MDc2NWE3NTBmMzhmMjI0YmI4ZGVmYWVlODA2YmI2MDU4Zjg0ODE4MzM4MTQ2ZWJmOTRhMDJlNjNkODg1ZiJ9fX0="
     - "name": "§c§lRed gift"
-      "texture": "df5898ad54e634c59fab5b284d49b3e25d015512caa3ab5620cecf00b84f1345"
+      "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTcyNmQ5ZDA2MzJlNDBiZGE1YmNmNjU4MzliYTJjYzk4YTg3YmQ2MTljNTNhZGYwMDMxMGQ2ZmM3MWYwNDJiNSJ9fX0="
+    - "name": "§e§lYellow gift"
+      "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTM3NTA2MWQwOGYxZDdiMzE3Njc1YWE3ZmE4ODAwZDZmMjA2NmUwMThkOWY5MWVjZGRmOWNhZjMwNGU5N2U5MiJ9fX0="
     - "name": "§a§lGreen gift"
-      "texture": "5726d9d0632e40bda5bcf65839ba2cc98a87bd619c53adf00310d6fc71f042b5"
-    - "name": "§e§lBlue gift"
-      "texture": "b0b45cbfbdfb6dc6694de96d97da36ae7b5fe3cd94a5b26250554c5f022ca7d0"
-    - "name": "§d§lYellow gift"
-      "texture": "5726d9d0632e40bda5bcf65839ba2cc98a87bd619c53adf00310d6fc71f042b5"
-    - "name": "§b§lPurple gift"
-      "texture": "1375061d08f1d7b317675aa7fa8800d6f2066e018d9f91ecddf9caf304e97e92"
+      "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODFlNDJlMzcyNWMyYjRhZTY5MDA1ODBjNGUyYTZiODMwZjZlY2EwMjExZjdhMzY0MTQzM2ZjNjdmYmM0M2QzZiJ9fX0="
+    - "name": "§b§lAqua gift"
+      "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDZlMTJmZGFlMWZjZWJhNjg3OWY2NTk3OTYxMzJhN2ZmYTA4Y2Q5MmEyNmNiN2ExMDY3ZDQ5NzAzZDdiMWI0YiJ9fX0="
+    - "name": "§d§lLilac gift"
+      "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGQyOWIwNmM3YzM3Y2JkMmE3NjU5MDgyNzdmYThlYWQwZTRkYzY2YTExM2YzNDdkZTNiYWI5MWZhZGU0NjkxMiJ9fX0="
+    - "name": "§5§lPurple gift"
+      "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjBiNDVjYmZiZGZiNmRjNjY5NGRlOTZkOTdkYTM2YWU3YjVmZTNjZDk0YTViMjYyNTA1NTRjNWYwMjJjYTdkMCJ9fX0="
   "gui":
     "acceptButton":
       "material": "GREEN_STAINED_GLASS_PANE"

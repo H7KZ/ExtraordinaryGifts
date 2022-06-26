@@ -19,15 +19,19 @@ repositories {
         name = 'velocity'
         url = 'https://nexus.velocitypowered.com/repository/maven-public/'
     }
+    maven {
+        url = "https://repo.decalium.ru/releases"
+    }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT'
     // https://mvnrepository.com/artifact/com.mojang/authlib
     compileOnly 'com.mojang:authlib:3.5.41'
+    implementation("com.manya:persistent-data-types:1.0.22")
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 18
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion

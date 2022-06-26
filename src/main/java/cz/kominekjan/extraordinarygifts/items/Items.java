@@ -69,7 +69,7 @@ public class Items {
         if (gifts.isEmpty()) {
             LinkedHashMap<String, String> gift = new LinkedHashMap<>();
             gift.put("name", "§c§lRed gift");
-            gift.put("uuid", "5726d9d0632e40bda5bcf65839ba2cc98a87bd619c53adf00310d6fc71f042b5");
+            gift.put("uuid", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTcyNmQ5ZDA2MzJlNDBiZGE1YmNmNjU4MzliYTJjYzk4YTg3YmQ2MTljNTNhZGYwMDMxMGQ2ZmM3MWYwNDJiNSJ9fX0");
             gifts.add(gift);
         }
 

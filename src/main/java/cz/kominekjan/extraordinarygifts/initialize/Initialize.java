@@ -7,6 +7,7 @@ import cz.kominekjan.extraordinarygifts.events.GiftAppearanceMenuEvent;
 import cz.kominekjan.extraordinarygifts.events.GiftMenuEvent;
 import cz.kominekjan.extraordinarygifts.items.Items;
 import cz.kominekjan.extraordinarygifts.messages.Colors;
+import cz.kominekjan.extraordinarygifts.persistentdatatypes.PersistentDataItemStackArray;
 
 import java.util.Objects;
 
@@ -37,5 +38,9 @@ public class Initialize {
         plugin.getServer().getPluginManager().registerEvents(new GiftMenuEvent(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new GiftAppearanceMenuEvent(), plugin);
         System.out.println(ANSI_CYAN + "ExtraordinaryGifts: events have been registered" + ANSI_RESET);
+    }
+
+    public static void types() {
+        PersistentDataItemStackArray.init();
     }
 }

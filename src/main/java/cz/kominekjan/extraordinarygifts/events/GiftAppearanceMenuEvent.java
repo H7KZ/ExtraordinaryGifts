@@ -1,6 +1,7 @@
 package cz.kominekjan.extraordinarygifts.events;
 
 import cz.kominekjan.extraordinarygifts.databases.GiftMap;
+import cz.kominekjan.extraordinarygifts.gift.Gift;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.items.Items;
 import org.bukkit.NamespacedKey;
@@ -23,6 +24,8 @@ public class GiftAppearanceMenuEvent implements Listener {
     private static final ItemStack[] giftAppearanceMenuCancelItems = {
             Items.giftAppearanceMenuCancel,
     };
+
+    private static final ArrayList<ItemStack> giftAppearanceMenuGiftArray = Items.giftsArray;
 
     private static void cancel(ArrayList<ItemStack> items, Player p) {
         for (ItemStack item : items) {
@@ -51,6 +54,17 @@ public class GiftAppearanceMenuEvent implements Listener {
         ItemStack currentItem = e.getCurrentItem();
 
         e.setCancelled(true);
+
+        if (giftAppearanceMenuGiftArray.contains(currentItem)) {
+            NamespacedKey key = new NamespacedKey(plugin, "gift");
+
+            assert currentItem != null;
+            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("gift")) {
+                e.setCancelled(true);
+                Gift.create((Player) e.getWhoClicked(), currentItem);
+                e.getWhoClicked().closeInventory();
+            }
+        }
 
         if (Arrays.asList(giftAppearanceMenuCancelItems).contains(currentItem)) {
             NamespacedKey key = new NamespacedKey(plugin, "cancel");

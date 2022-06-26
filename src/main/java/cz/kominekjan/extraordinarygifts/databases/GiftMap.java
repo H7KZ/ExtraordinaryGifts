@@ -8,5 +8,5 @@ import java.util.Map;
 import java.util.UUID;
 
 public class GiftMap {
-    public static Map<UUID, ArrayList<ItemStack>> temporary = new HashMap<>();
+    public static final Map<UUID, ArrayList<ItemStack>> temporary = new HashMap<>();
 }
