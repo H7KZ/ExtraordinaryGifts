@@ -2,7 +2,6 @@ package cz.kominekjan.extraordinarygifts.initialize;
 
 import cz.kominekjan.extraordinarygifts.ExtraordinaryGifts;
 import cz.kominekjan.extraordinarygifts.commands.Commands;
-import cz.kominekjan.extraordinarygifts.databases.GiftDatabase;
 import cz.kominekjan.extraordinarygifts.events.GiftAppearanceMenuEvent;
 import cz.kominekjan.extraordinarygifts.events.GiftMenuEvent;
 import cz.kominekjan.extraordinarygifts.events.GiftPlaceEvent;
@@ -17,12 +16,6 @@ public class Initialize {
     private static final String ANSI_CYAN = Colors.ANSI_PURPLE;
 
     private static final String ANSI_RESET = Colors.ANSI_PURPLE;
-
-    public static void database() {
-        GiftDatabase.setup();
-        GiftDatabase.save();
-        System.out.println(ANSI_CYAN + "ExtraordinaryGifts: Gift Database loaded" + ANSI_RESET);
-    }
 
     public static void commands() {
         Objects.requireNonNull(plugin.getCommand("egifts")).setExecutor(new Commands());

@@ -56,14 +56,4 @@ public class Head {
         return head;
     }
 
-    public static ItemStack create(String name, String uuid) {
-        ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1);
-
-        SkullMeta headMeta = (SkullMeta) head.getItemMeta();
-
-        assert headMeta != null;
-        headMeta.setDisplayName(name);
-
-        return setCustomHead(uuid, head, headMeta);
-    }
 }

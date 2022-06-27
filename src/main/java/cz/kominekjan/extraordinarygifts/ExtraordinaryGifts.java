@@ -1,6 +1,5 @@
 package cz.kominekjan.extraordinarygifts;
 
-import cz.kominekjan.extraordinarygifts.databases.GiftDatabase;
 import cz.kominekjan.extraordinarygifts.initialize.Initialize;
 import cz.kominekjan.extraordinarygifts.messages.Disable;
 import cz.kominekjan.extraordinarygifts.messages.Enable;
@@ -25,9 +24,6 @@ public final class ExtraordinaryGifts extends JavaPlugin {
         config.options().copyDefaults(true);
         saveDefaultConfig();
 
-        //GIFT DATABASE SETUP & LOAD
-        Initialize.database();
-
         //COMMAND REGISTERING
         Initialize.commands();
 
@@ -43,8 +39,8 @@ public final class ExtraordinaryGifts extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        //GIFT DATABASE FILE SAVE
-        GiftDatabase.save();
+        //MAKING SURE THAT PLAYERS INV STAYS CLEAR WHEN DISABLING THIS PLUGIN
+        Disable.reloading();
 
         //ENDING OF SHUTDOWN
         Disable.closing();

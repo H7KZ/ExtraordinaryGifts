@@ -13,16 +13,12 @@
 #   |               ExtraordinaryGifts Config file               |
 #   |   copyright (c) 2022 by Jan Komínek. All rights reserved.  |
 #   --------------------------------------------------------------
-
-
-# ****----------------------------------------------****
-# **                   GIFT DATABASE                  **
-# ****----------------------------------------------****
-"database":
-  # Path to the database file
-  #        ˘folder˘        ˘file˘
-  "path": "database/ExtraordinaryGifts.yml"
-
+#
+#   PLEASE DO NOT USE /RELOAD TO RELOAD THE PLUGIN!!!!!
+#   THERE IS A BUILT IN COMMAND FOR RELOAD! /eGifts reload
+#   IF YOU WON'T USE THIS INTERNAL COMMAND THERE IS A RISK OF HAVING A BUG AND PUTTING BUGGED ITEMS INTO YOUR INVENTORY!
+#   THIS BUG IS NOT DONE BY ME, IT IS A BUG IN THE SPIGOT IT SELF! BE CAREFUL!
+#
 
 # ****----------------------------------------------****
 # **              CUSTOM GIFT INVENTORY               **
@@ -57,7 +53,7 @@
   # Array of UUIDs of textures for the gifts. Maximal number of textures/UUID is 45
   # When you have more than 45 textures, there won't be more than 45 textures in the gift
   # If array is empty, there will be set a default texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTcyNmQ5ZDA2MzJlNDBiZGE1YmNmNjU4MzliYTJjYzk4YTg3YmQ2MTljNTNhZGYwMDMxMGQ2ZmM3MWYwNDJiNSJ9fX0" (red gift)
-  # To add an texture go to https://minecraft-heads.com/ and search for the head texture you want. Then copy the UUID of the texture to this array list.
+  # To add a texture go to https://minecraft-heads.com/ and search for the head texture you want. Then copy the UUID of the texture to this array list.
   "items":
     - "name": "§3§lCyan gift"
       "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGY1ODk4YWQ1NGU2MzRjNTlmYWI1YjI4NGQ0OWIzZTI1ZDAxNTUxMmNhYTNhYjU2MjBjZWNmMDBiODRmMTM0NSJ9fX0="

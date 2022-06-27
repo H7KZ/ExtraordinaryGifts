@@ -8,11 +8,11 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("NullableProblems")
 public class GiftAppearanceMenu implements InventoryHolder {
     private final Inventory giftAppearanceMenuInv;
     private final ItemStack neutralGlassPanel = Items.giftAppearanceMenuNeutral;
     private final ItemStack cancelGlassPanel = Items.giftAppearanceMenuCancel;
+    public static final String title = "Gift Appearance Menu";
 
     public GiftAppearanceMenu() {
         ArrayList<ItemStack> gifts = Items.giftsArray;
@@ -27,7 +27,7 @@ public class GiftAppearanceMenu implements InventoryHolder {
 
         int fullInvSize = navbarSize + 9;
 
-        giftAppearanceMenuInv = Bukkit.createInventory(this, fullInvSize, "Gift Appearance Menu");
+        giftAppearanceMenuInv = Bukkit.createInventory(this, fullInvSize, title);
         initialize(navbarSize, fullInvSize, gifts);
     }
 
@@ -43,6 +43,7 @@ public class GiftAppearanceMenu implements InventoryHolder {
         }
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public Inventory getInventory() {
         return giftAppearanceMenuInv;

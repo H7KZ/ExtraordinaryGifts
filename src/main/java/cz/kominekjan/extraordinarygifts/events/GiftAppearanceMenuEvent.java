@@ -13,14 +13,12 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 
 public class GiftAppearanceMenuEvent implements Listener {
-
+    public static final Map<UUID, Boolean> receiveItems = new HashMap<>();
     private static final ItemStack[] giftAppearanceMenuCancelItems = {
             Items.giftAppearanceMenuCancel,
     };
@@ -77,6 +75,8 @@ public class GiftAppearanceMenuEvent implements Listener {
             NamespacedKey key = new NamespacedKey(plugin, "cancel");
 
             if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("cancel")) {
+                receiveItems.put(e.getWhoClicked().getUniqueId(), true);
+
                 e.getWhoClicked().closeInventory();
             }
         }
@@ -88,7 +88,9 @@ public class GiftAppearanceMenuEvent implements Listener {
             return;
         }
 
-        if (e.getInventory().getHolder() instanceof GiftAppearanceMenu) {
+        if (e.getInventory().getHolder() instanceof GiftAppearanceMenu && receiveItems.get(e.getPlayer().getUniqueId()) != null) {
+            receiveItems.remove(e.getPlayer().getUniqueId());
+
             cancel(GiftMap.temporary.get(e.getPlayer().getUniqueId()), (Player) e.getPlayer());
         }
     }

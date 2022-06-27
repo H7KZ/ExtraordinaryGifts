@@ -29,10 +29,6 @@ public class Item extends ItemStack {
         return item;
     }
 
-    public static ItemStack create(Material material, String name, List<String> lore, Boolean enchant) {
-        return createItemStack(material, name, lore, enchant);
-    }
-
     private static ItemStack createItemStack(Material material, String name, List<String> lore, Boolean enchant) {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();

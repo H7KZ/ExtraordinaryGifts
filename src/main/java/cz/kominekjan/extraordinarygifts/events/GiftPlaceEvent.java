@@ -1,13 +1,11 @@
 package cz.kominekjan.extraordinarygifts.events;
 
-import cz.kominekjan.extraordinarygifts.items.Items;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Objects;
@@ -21,7 +19,7 @@ public class GiftPlaceEvent implements Listener {
             return;
         }
 
-        if (Objects.requireNonNull(e.getItem()).getType() != Material.PLAYER_HEAD) {
+        if (e.getItem().getType() != Material.PLAYER_HEAD) {
             return;
         }
 
@@ -29,14 +27,12 @@ public class GiftPlaceEvent implements Listener {
             return;
         }
 
-        for (ItemStack gift : Items.giftsArray) {
-            if (gift == e.getItem()) {
-                NamespacedKey namespacedKey = new NamespacedKey(plugin, "gift");
+        try {
+            NamespacedKey namespacedKey = new NamespacedKey(plugin, "gift");
 
-                if (!Objects.requireNonNull(Objects.requireNonNull(e.getItem().getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals("gift")) {
-                    e.setCancelled(true);
-                }
+            if (Objects.requireNonNull(Objects.requireNonNull(e.getItem().getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals("gift")) {
+                e.setCancelled(true);
             }
-        }
+        } catch (NullPointerException ignored) {}
     }
 }

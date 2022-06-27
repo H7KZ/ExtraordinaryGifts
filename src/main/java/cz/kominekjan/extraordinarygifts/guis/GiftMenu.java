@@ -15,6 +15,7 @@ public class GiftMenu implements InventoryHolder {
     private final ItemStack neutralGlassPanel = Items.giftMenuNeutral;
     private final ItemStack acceptGlassPanel = Items.giftMenuAccept;
     private final ItemStack cancelGlassPanel = Items.giftMenuCancel;
+    public static final String title = "Gift Menu";
 
     public GiftMenu() {
         int invSize = config.getInt("giftInventory.size");
@@ -32,7 +33,7 @@ public class GiftMenu implements InventoryHolder {
 
         int fullInvSize = correctInvSize + 9;
 
-        giftMenuInv = Bukkit.createInventory(this, fullInvSize, "Gift Menu");
+        giftMenuInv = Bukkit.createInventory(this, fullInvSize, title);
         initialize(invSize, correctInvSize, fullInvSize);
     }
 

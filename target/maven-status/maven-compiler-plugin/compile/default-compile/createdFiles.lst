@@ -1,3 +1,4 @@
+cz\kominekjan\extraordinarygifts\commands\all\ReloadCommand.class
 cz\kominekjan\extraordinarygifts\messages\Disable.class
 cz\kominekjan\extraordinarygifts\items\Head.class
 cz\kominekjan\extraordinarygifts\events\GiftAppearanceMenuEvent.class
@@ -6,7 +7,6 @@ cz\kominekjan\extraordinarygifts\items\Item.class
 cz\kominekjan\extraordinarygifts\commands\all\MailCommand.class
 cz\kominekjan\extraordinarygifts\guis\GiftMenu.class
 cz\kominekjan\extraordinarygifts\items\Items.class
-cz\kominekjan\extraordinarygifts\databases\GiftDatabase.class
 cz\kominekjan\extraordinarygifts\events\GiftPlaceEvent.class
 cz\kominekjan\extraordinarygifts\messages\Colors.class
 cz\kominekjan\extraordinarygifts\messages\Errors.class

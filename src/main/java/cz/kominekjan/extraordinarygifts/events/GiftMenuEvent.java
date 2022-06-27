@@ -20,7 +20,7 @@ import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 
 public class GiftMenuEvent implements Listener {
 
-    private static final Map<UUID, Boolean> receiveItems = new HashMap<>();
+    public static final Map<UUID, Boolean> receiveItems = new HashMap<>();
     private static final ItemStack[] giftMenuNeutralItems = {
             Items.giftMenuNeutral,
     };
@@ -33,7 +33,7 @@ public class GiftMenuEvent implements Listener {
             Items.giftMenuCancel,
     };
 
-    private static final ItemStack[] giftMenuRemoveItems = {
+    public static final ItemStack[] giftMenuRemoveItems = {
             Items.giftMenuNeutral,
             Items.giftMenuAccept,
             Items.giftMenuCancel

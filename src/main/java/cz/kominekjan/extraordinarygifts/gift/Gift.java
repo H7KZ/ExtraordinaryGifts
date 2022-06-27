@@ -30,11 +30,21 @@ public class Gift {
     }
 
     public static void open(Player p) {
-        NamespacedKey namespacedKey = new NamespacedKey(plugin, "contents");
+        try {
+            NamespacedKey namespacedKey = new NamespacedKey(plugin, "contents");
 
-        List<ItemStack> items = Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(p.getItemInUse()).getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataItemStackArray.type));
+            List<ItemStack> items = Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(p.getInventory().getItemInMainHand()).getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataItemStackArray.type));
 
-        p.sendMessage(items.toString());
+            p.getInventory().remove(p.getInventory().getItemInMainHand());
+
+            items.forEach(item -> {
+                if (p.getInventory().firstEmpty() == -1) {
+                    p.getWorld().dropItem(p.getLocation(), item);
+                } else {
+                    p.getInventory().addItem(item);
+                }
+            });
+        } catch (NullPointerException ignored) {}
     }
 
     private static ItemStack addGiftContents(List<ItemStack> items, ItemStack gift) {
