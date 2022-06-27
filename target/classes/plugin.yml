@@ -1,0 +1,11 @@
+name: ExtraordinaryGifts
+version: '1.0-SNAPSHOT'
+main: cz.kominekjan.extraordinarygifts.ExtraordinaryGifts
+api-version: 1.19
+authors: [ Jan_Kominek ]
+description: Plugin to send gifts
+website: https://kominekjan.cz/
+commands:
+  egifts:
+    usage: </command>
+    description: Run ExtraordinaryGifts plugin

@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 
+@SuppressWarnings("unchecked")
 public class Items {
     public static ItemStack giftMenuNeutral;
     public static ItemStack giftMenuAccept;

@@ -77,6 +77,10 @@ public class GiftMenuEvent implements Listener {
         return items.isEmpty();
     }
 
+    private static Boolean isPersistentStringKeyPresent(NamespacedKey key, String valueText, ItemStack item) {
+        return Objects.requireNonNull(Objects.requireNonNull(item.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals(valueText);
+    }
+
     @EventHandler
     public void onGiftMenuClick(InventoryClickEvent e) {
 
@@ -90,6 +94,10 @@ public class GiftMenuEvent implements Listener {
 
         ItemStack currentItem = e.getCurrentItem();
 
+        if (currentItem == null) {
+            return;
+        }
+
         if (e.getClickedInventory() == e.getWhoClicked().getInventory() && Objects.requireNonNull(e.getClickedInventory()).contains(currentItem)) {
             return;
         }
@@ -97,9 +105,9 @@ public class GiftMenuEvent implements Listener {
         if (Arrays.asList(giftMenuNeutralItems).contains(currentItem)) {
             NamespacedKey key = new NamespacedKey(plugin, "neutral");
 
-            assert currentItem != null;
-            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("neutral")) {
+            if (isPersistentStringKeyPresent(key, "neutral", currentItem)) {
                 e.setCancelled(true);
+                return;
             }
         }
 
@@ -108,25 +116,30 @@ public class GiftMenuEvent implements Listener {
 
             if (isGiftEmpty(e.getInventory())) {
                 e.setCancelled(true);
+
                 return;
             }
 
-            assert currentItem != null;
-            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("accept")) {
+            if (isPersistentStringKeyPresent(key, "accept", currentItem)) {
                 e.setCancelled(true);
+
                 GiftMap.temporary.put(e.getWhoClicked().getUniqueId(), removeGiftMenuItems(e.getInventory().getContents()));
+
                 GiftAppearanceMenu giftAppearanceMenu = new GiftAppearanceMenu();
+
                 e.getWhoClicked().openInventory(giftAppearanceMenu.getInventory());
+                return;
             }
         }
 
         if (Arrays.asList(giftMenuCancelItem).contains(currentItem)) {
             NamespacedKey key = new NamespacedKey(plugin, "cancel");
 
-            assert currentItem != null;
-            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("cancel")) {
+            if (isPersistentStringKeyPresent(key, "cancel", currentItem)) {
                 e.setCancelled(true);
+
                 receiveItems.put(e.getWhoClicked().getUniqueId(), true);
+
                 e.getWhoClicked().closeInventory();
             }
         }
@@ -140,6 +153,7 @@ public class GiftMenuEvent implements Listener {
 
         if (e.getInventory().getHolder() instanceof GiftMenu && receiveItems.get(e.getPlayer().getUniqueId()) != null) {
             receiveItems.remove(e.getPlayer().getUniqueId());
+
             cancel(e);
         }
     }

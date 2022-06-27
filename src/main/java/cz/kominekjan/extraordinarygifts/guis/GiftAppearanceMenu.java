@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("NullableProblems")
 public class GiftAppearanceMenu implements InventoryHolder {
     private final Inventory giftAppearanceMenuInv;
     private final ItemStack neutralGlassPanel = Items.giftAppearanceMenuNeutral;

@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 
+@SuppressWarnings("NullableProblems")
 public class GiftMenu implements InventoryHolder {
     private final Inventory giftMenuInv;
     private final ItemStack neutralGlassPanel = Items.giftMenuNeutral;

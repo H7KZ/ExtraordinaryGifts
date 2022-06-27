@@ -1,20 +1,32 @@
 package cz.kominekjan.extraordinarygifts.gift;
 
 
+import cz.kominekjan.extraordinarygifts.databases.GiftMap;
 import cz.kominekjan.extraordinarygifts.persistentdatatypes.PersistentDataItemStackArray;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 
 public class Gift {
-    public static void create(Player p, ItemStack giftType) {
+    public static void create(Player p, ItemStack giftAppearance) {
+        ArrayList<ItemStack> contents = GiftMap.temporary.get(p.getUniqueId());
 
+        ItemStack gift = addGiftContents(contents, giftAppearance);
+
+        GiftMap.temporary.remove(p.getUniqueId());
+
+        if (p.getInventory().firstEmpty() == -1) {
+            p.getWorld().dropItem(p.getLocation(), gift);
+        } else {
+            p.getInventory().addItem(gift);
+        }
     }
 
     public static void open(Player p) {

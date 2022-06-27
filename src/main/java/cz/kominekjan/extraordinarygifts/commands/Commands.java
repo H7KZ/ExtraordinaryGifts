@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import static cz.kominekjan.extraordinarygifts.messages.Errors.notEnoughArgs;
 import static cz.kominekjan.extraordinarygifts.messages.Errors.youMustBeAPlayer;
 
+@SuppressWarnings("NullableProblems")
 public class Commands implements CommandExecutor {
 
     private final String[] commandNameList = {"help", "create", "send", "open", "mail"};

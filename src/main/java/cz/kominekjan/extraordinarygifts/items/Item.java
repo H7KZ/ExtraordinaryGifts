@@ -15,36 +15,25 @@ import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 
 public class Item extends ItemStack {
     public static ItemStack create(Material material, String name, List<String> lore, Boolean enchant, String key, String value) {
-        ItemStack item = new ItemStack(material);
+        ItemStack item = createItemStack(material, name, lore, enchant);
+
         ItemMeta meta = item.getItemMeta();
-        assert meta != null;
-
-        meta.setDisplayName(name);
-
-        if (lore != null) {
-            List<String> loreList = new ArrayList<>();
-
-            loreList.add(String.valueOf(lore));
-
-            meta.setLore(loreList);
-        }
-
-        if (enchant) {
-            meta.addEnchant(Enchantment.LUCK, 1, false);
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        }
 
         NamespacedKey namespacedKey = new NamespacedKey(plugin, key);
 
+        assert meta != null;
         meta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.STRING, value);
 
-        meta.setLore(lore);
         item.setItemMeta(meta);
 
         return item;
     }
 
     public static ItemStack create(Material material, String name, List<String> lore, Boolean enchant) {
+        return createItemStack(material, name, lore, enchant);
+    }
+
+    private static ItemStack createItemStack(Material material, String name, List<String> lore, Boolean enchant) {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         assert meta != null;

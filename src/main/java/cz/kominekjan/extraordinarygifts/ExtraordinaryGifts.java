@@ -37,18 +37,12 @@ public final class ExtraordinaryGifts extends JavaPlugin {
         //EVENT REGISTERING
         Initialize.events();
 
-        //TYPES INIT
-        Initialize.types();
-
         //ENDING OF START
         Enable.closing();
     }
 
     @Override
     public void onDisable() {
-        //SHUTTING DOWN
-        Disable.starting();
-
         //GIFT DATABASE FILE SAVE
         GiftDatabase.save();
 

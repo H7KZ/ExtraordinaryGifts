@@ -55,21 +55,27 @@ public class GiftAppearanceMenuEvent implements Listener {
 
         e.setCancelled(true);
 
-        if (giftAppearanceMenuGiftArray.contains(currentItem)) {
-            NamespacedKey key = new NamespacedKey(plugin, "gift");
+        if (currentItem == null) {
+            return;
+        }
 
-            assert currentItem != null;
-            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("gift")) {
-                e.setCancelled(true);
-                Gift.create((Player) e.getWhoClicked(), currentItem);
-                e.getWhoClicked().closeInventory();
+        for (ItemStack gift : giftAppearanceMenuGiftArray) {
+            if (Objects.equals(currentItem.toString(), gift.toString())) {
+                NamespacedKey key = new NamespacedKey(plugin, "gift");
+
+                if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("gift")) {
+                    Gift.create((Player) e.getWhoClicked(), currentItem);
+
+                    e.getWhoClicked().closeInventory();
+                    return;
+                }
             }
         }
+
 
         if (Arrays.asList(giftAppearanceMenuCancelItems).contains(currentItem)) {
             NamespacedKey key = new NamespacedKey(plugin, "cancel");
 
-            assert currentItem != null;
             if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("cancel")) {
                 e.getWhoClicked().closeInventory();
             }
