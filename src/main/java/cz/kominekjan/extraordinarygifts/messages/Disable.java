@@ -1,12 +1,8 @@
 package cz.kominekjan.extraordinarygifts.messages;
 
-import cz.kominekjan.extraordinarygifts.commands.all.ReloadCommand;
 import cz.kominekjan.extraordinarygifts.databases.GiftMap;
-import cz.kominekjan.extraordinarygifts.events.GiftAppearanceMenuEvent;
-import cz.kominekjan.extraordinarygifts.events.GiftMenuEvent;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
-import cz.kominekjan.extraordinarygifts.initialize.Initialize;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,10 +19,6 @@ public class Disable {
 
     public static void closing() {
         System.out.println(ANSI_CYAN + "ExtraordinaryGifts: has been shutdown successfully" + ANSI_RESET);
-    }
-
-    public static void reloading() {
-        ReloadCommand.command();
     }
 
     public static void stopping() {

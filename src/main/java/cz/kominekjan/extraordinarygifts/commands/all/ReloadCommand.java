@@ -8,13 +8,10 @@ import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.initialize.Initialize;
 import cz.kominekjan.extraordinarygifts.messages.Disable;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
-import static cz.kominekjan.extraordinarygifts.events.GiftMenuEvent.giftMenuRemoveItems;
 
 public class ReloadCommand {
     public static final String commandName = "reload";
@@ -27,7 +24,7 @@ public class ReloadCommand {
 
         for (Player player : players) {
             if (player.getOpenInventory().getTopInventory().getHolder() instanceof GiftMenu) {
-                cancel(player);
+                Disable.givePlayersItemsBack(player);
             }
 
             if (player.getOpenInventory().getTopInventory().getHolder() instanceof GiftAppearanceMenu) {
@@ -56,9 +53,5 @@ public class ReloadCommand {
         GiftAppearanceMenuEvent.receiveItems.clear();
 
         System.out.println("Reloaded!");
-    }
-
-    private static void cancel(Player p) {
-        Disable.givePlayersItemsBack(p);
     }
 }
