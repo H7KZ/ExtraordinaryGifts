@@ -1,6 +1,9 @@
 package cz.kominekjan.extraordinarygifts.commands;
 
-import cz.kominekjan.extraordinarygifts.commands.all.*;
+import cz.kominekjan.extraordinarygifts.commands.all.CreateCommand;
+import cz.kominekjan.extraordinarygifts.commands.all.HelpCommand;
+import cz.kominekjan.extraordinarygifts.commands.all.OpenCommand;
+import cz.kominekjan.extraordinarygifts.commands.all.ReloadCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +17,7 @@ import static cz.kominekjan.extraordinarygifts.messages.Errors.youMustBeAPlayer;
 @SuppressWarnings("NullableProblems")
 public class Commands implements CommandExecutor {
 
-    private final String[] commandNameList = {"help", "reload", "create", "send", "open", "mail"};
+    private final String[] commandNameList = {"help", "reload", "create", "open"};
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -44,9 +47,7 @@ public class Commands implements CommandExecutor {
         switch (args[0]) {
             case HelpCommand.commandName -> HelpCommand.command(p);
             case CreateCommand.commandName -> CreateCommand.command(p);
-            case MailCommand.commandName -> MailCommand.command(p);
             case OpenCommand.commandName -> OpenCommand.command(p);
-            case SendCommand.commandName -> SendCommand.command(p);
         }
 
         return true;

@@ -1,19 +1,31 @@
-.gradle
-**/build/
-!src/**/build/
+# Eclipse stuff
+/.classpath
+/.project
+/.settings
 
-# Ignore Gradle GUI config
-gradle-app.setting
+# netbeans
+/nbproject
 
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
+# we use maven!
+/build.xml
 
-# Cache of project
-.gradletasknamecache
+# maven
+/target
 
-# Eclipse Gradle plugin generated files
-# Eclipse Core
-.project
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
-target/
+# vim
+.*.sw[a-p]
+
+# various other potential build files
+/build
+/bin
+/dist
+/manifest.mf
+
+# Mac filesystem dust
+.DS_Store
+
+# intellij
+*.iml
+*.ipr
+*.iws
+.idea/

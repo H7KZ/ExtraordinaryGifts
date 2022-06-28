@@ -4,6 +4,7 @@ import cz.kominekjan.extraordinarygifts.databases.GiftMap;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.items.Items;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,6 +22,9 @@ import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 public class GiftMenuEvent implements Listener {
 
     public static final Map<UUID, Boolean> receiveItems = new HashMap<>();
+
+    private static final ArrayList<Material> giftMenuBannedMaterials = Items.giftMenuBannedMaterials;
+
     private static final ItemStack[] giftMenuNeutralItems = {
             Items.giftMenuNeutral,
     };
@@ -56,6 +60,7 @@ public class GiftMenuEvent implements Listener {
     private static void cancel(InventoryCloseEvent e) {
         Player p = (Player) e.getPlayer();
         for (ItemStack item : e.getInventory().getContents()) {
+            //noinspection DuplicatedCode
             if (Arrays.asList(giftMenuRemoveItems).contains(item) || item == null) {
                 continue;
             }
@@ -97,6 +102,20 @@ public class GiftMenuEvent implements Listener {
         if (currentItem == null) {
             return;
         }
+
+        if (giftMenuBannedMaterials != null && giftMenuBannedMaterials.contains(currentItem.getType())) {
+            e.setCancelled(true);
+            return;
+        }
+
+        try {
+            NamespacedKey namespacedKey = new NamespacedKey(plugin, "gift");
+
+            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals("gift")) {
+                e.setCancelled(true);
+                return;
+            }
+        } catch (NullPointerException ignored) {}
 
         if (e.getClickedInventory() == e.getWhoClicked().getInventory() && Objects.requireNonNull(e.getClickedInventory()).contains(currentItem)) {
             return;

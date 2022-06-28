@@ -26,6 +26,7 @@ public class GiftAppearanceMenuEvent implements Listener {
     private static final ArrayList<ItemStack> giftAppearanceMenuGiftArray = Items.giftsArray;
 
     private static void cancel(ArrayList<ItemStack> items, Player p) {
+        //noinspection DuplicatedCode
         for (ItemStack item : items) {
             if (p.getInventory().firstEmpty() == -1) {
                 p.getWorld().dropItem(p.getLocation(), item);

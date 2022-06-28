@@ -6,6 +6,7 @@ import cz.kominekjan.extraordinarygifts.events.GiftMenuEvent;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.initialize.Initialize;
+import cz.kominekjan.extraordinarygifts.messages.Disable;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,7 +31,7 @@ public class ReloadCommand {
             }
 
             if (player.getOpenInventory().getTopInventory().getHolder() instanceof GiftAppearanceMenu) {
-                cancel(GiftMap.temporary.get(player.getUniqueId()), player);
+                Disable.givePlayersItemsBack(GiftMap.temporary.get(player.getUniqueId()), player);
             }
         }
 
@@ -58,30 +59,6 @@ public class ReloadCommand {
     }
 
     private static void cancel(Player p) {
-        for (ItemStack item : p.getOpenInventory().getTopInventory().getContents()) {
-            if (Arrays.asList(giftMenuRemoveItems).contains(item) || item == null) {
-                continue;
-            }
-
-            if (p.getInventory().firstEmpty() == -1) {
-                p.getWorld().dropItem(p.getLocation(), item);
-                continue;
-            }
-
-            p.getInventory().addItem(item);
-        }
-    }
-
-    private static void cancel(ArrayList<ItemStack> items, Player p) {
-        for (ItemStack item : items) {
-            if (p.getInventory().firstEmpty() == -1) {
-                p.getWorld().dropItem(p.getLocation(), item);
-                continue;
-            }
-
-            p.getInventory().addItem(item);
-        }
-
-        GiftMap.temporary.remove(p.getUniqueId());
+        Disable.givePlayersItemsBack(p);
     }
 }

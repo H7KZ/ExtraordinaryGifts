@@ -10,9 +10,7 @@ public class HelpCommand {
             "/egifts help: shows this help",
             "/egifts reload: reloads the entire plugin",
             "/egifts create: creates a new gift",
-            "/egifts send <message>: sends a gift to a player with/out a message",
-            "/egifts open: opens a gift in your hand",
-            "/egifts mail: opens mail of gifts"
+            "/egifts open: opens a gift in your hand"
     };
 
     public static void command(Player p) {

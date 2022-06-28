@@ -28,6 +28,13 @@
   # Size of the inventory (number of slots from 1 to 27)
   # If you set the size to lesser than 1 or greater than 27, the size will be set to default size of 27.
   "size": 27
+  # Materials that are NOT allowed to be put into the inventory
+  # Those Materials also include the gift item itself because of possible infinity inventory
+  "bannedItems":
+    - "material": "BEDROCK"
+    - "material": "BARRIER"
+  # GUI Items
+  # For no title use " " with a space NOT "" without a space
   "gui":
     "acceptButton":
       "material": "GREEN_STAINED_GLASS_PANE"

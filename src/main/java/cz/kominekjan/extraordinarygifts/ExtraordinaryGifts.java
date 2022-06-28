@@ -40,7 +40,7 @@ public final class ExtraordinaryGifts extends JavaPlugin {
     @Override
     public void onDisable() {
         //MAKING SURE THAT PLAYERS INV STAYS CLEAR WHEN DISABLING THIS PLUGIN
-        Disable.reloading();
+        Disable.stopping();
 
         //ENDING OF SHUTDOWN
         Disable.closing();

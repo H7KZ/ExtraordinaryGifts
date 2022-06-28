@@ -13,6 +13,7 @@ public class Items {
     public static ItemStack giftMenuNeutral;
     public static ItemStack giftMenuAccept;
     public static ItemStack giftMenuCancel;
+    public static ArrayList<Material> giftMenuBannedMaterials;
     public static ItemStack giftAppearanceMenuNeutral;
     public static ItemStack giftAppearanceMenuCancel;
     public static ArrayList<ItemStack> giftsArray;
@@ -21,6 +22,8 @@ public class Items {
         initGiftMenuNeutral();
         initGiftMenuAccept();
         initGiftMenuCancel();
+
+        initGiftMenuBannedMaterials();
 
         initGiftAppearanceMenuNeutral();
         initGiftAppearanceMenuCancel();
@@ -47,6 +50,24 @@ public class Items {
         String text = config.getString("giftInventory.gui.cancelButton.text");
         Boolean enchanted = config.getBoolean("giftInventory.gui.cancelButton.enchanted");
         giftMenuCancel = Item.create(mat, text, null, enchanted, "cancel", "cancel");
+    }
+
+    private static void initGiftMenuBannedMaterials() {
+        ArrayList<Material> items = new ArrayList<>();
+
+        ArrayList<LinkedHashMap<String, String>> configBannedItems = (ArrayList<LinkedHashMap<String, String>>) config.get("giftInventory.bannedItems");
+
+        if (configBannedItems == null) {
+            giftMenuBannedMaterials = null;
+            return;
+        }
+
+        for (LinkedHashMap<String, String> configBannedItem : configBannedItems) {
+            Material mat = Material.valueOf(configBannedItem.get("material"));
+            items.add(mat);
+        }
+
+        giftMenuBannedMaterials = items;
     }
 
     private static void initGiftAppearanceMenuNeutral() {
