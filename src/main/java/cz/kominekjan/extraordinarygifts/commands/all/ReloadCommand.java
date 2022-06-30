@@ -5,7 +5,7 @@ import cz.kominekjan.extraordinarygifts.events.GiftAppearanceMenuEvent;
 import cz.kominekjan.extraordinarygifts.events.GiftMenuEvent;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
-import cz.kominekjan.extraordinarygifts.initialize.Initialize;
+import cz.kominekjan.extraordinarygifts.initialize.Deinitialize;
 import cz.kominekjan.extraordinarygifts.messages.Disable;
 import org.bukkit.entity.Player;
 
@@ -39,13 +39,13 @@ public class ReloadCommand {
 
         System.out.println("ReInitializing.");
         System.out.println("Items");
-        Initialize.items();
+        Deinitialize.items();
 
         System.out.println("Events");
-        Initialize.events();
+        Deinitialize.events();
 
         System.out.println("Commands");
-        Initialize.commands();
+        Deinitialize.commands();
 
         System.out.println("Clearing temporary gifts.");
         GiftMap.temporary.clear();

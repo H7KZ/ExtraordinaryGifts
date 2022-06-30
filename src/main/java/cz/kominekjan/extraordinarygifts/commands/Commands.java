@@ -4,6 +4,7 @@ import cz.kominekjan.extraordinarygifts.commands.all.CreateCommand;
 import cz.kominekjan.extraordinarygifts.commands.all.HelpCommand;
 import cz.kominekjan.extraordinarygifts.commands.all.OpenCommand;
 import cz.kominekjan.extraordinarygifts.commands.all.ReloadCommand;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -48,6 +49,7 @@ public class Commands implements CommandExecutor {
             case HelpCommand.commandName -> HelpCommand.command(p);
             case CreateCommand.commandName -> CreateCommand.command(p);
             case OpenCommand.commandName -> OpenCommand.command(p);
+            default -> p.sendMessage(ChatColor.RED + "eGifts: Unknown arguments! Please use /egifts help");
         }
 
         return true;
