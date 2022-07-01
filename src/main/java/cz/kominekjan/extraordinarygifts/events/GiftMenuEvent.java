@@ -6,6 +6,7 @@ import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.items.Items;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Tag;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +18,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.*;
 
+import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 
 public class GiftMenuEvent implements Listener {
@@ -24,6 +26,10 @@ public class GiftMenuEvent implements Listener {
     public static final Map<UUID, Boolean> receiveItems = new HashMap<>();
 
     private static final ArrayList<Material> giftMenuBannedMaterials = Items.giftMenuBannedMaterials;
+
+    private static final Boolean giftMenuBanShulkerBoxes = config.getBoolean("giftInventory.banShulkerBoxes");
+
+    private static final Set<Material> shulkerBoxTags = Tag.SHULKER_BOXES.getValues();
 
     private static final ItemStack[] giftMenuNeutralItems = {
             Items.giftMenuNeutral,
@@ -100,6 +106,11 @@ public class GiftMenuEvent implements Listener {
         ItemStack currentItem = e.getCurrentItem();
 
         if (currentItem == null) {
+            return;
+        }
+
+        if (giftMenuBanShulkerBoxes && shulkerBoxTags.contains(currentItem.getType())) {
+            e.setCancelled(true);
             return;
         }
 

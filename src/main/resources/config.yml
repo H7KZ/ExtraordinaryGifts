@@ -21,22 +21,6 @@
 #
 
 # ****----------------------------------------------****
-# **               CUSTOM GIFT ECONOMY                **
-# ****----------------------------------------------****
-"giftEconomy":
-  # Enable or disable the gift economy: true/false
-  "enabled": false
-  # The name of the economy plugin: For now there are only two options: "Vault" and "Treasury"
-  # Default value is "Vault"
-  # If left blank default value will be used
-  "plugin": "Vault"
-  # Price of creating a gift
-  # If left blank price of 0 will be used
-  # If you wish to use decimals please use a dot (.) instead of a comma (,)
-  "price": "10.0"
-
-
-# ****----------------------------------------------****
 # **              CUSTOM GIFT INVENTORY               **
 # ****----------------------------------------------****
 "giftInventory":
@@ -46,10 +30,10 @@
   "size": 27
   # Materials that are NOT allowed to be put into the inventory
   # Those Materials also include the gift item itself because of possible infinity inventory
+  "banShulkerBoxes": true
   "bannedItems":
     - "material": "BEDROCK"
     - "material": "BARRIER"
-    - "material": "SHULKER_BOX"
   # GUI Items
   # For no title use " " with a space NOT "" without a space
   "gui":
@@ -114,6 +98,21 @@
       "enchanted": false
   "itemSettings":
     "name": "§6Extraordinary Gift"
-    "lore":
-      - "§dThis is a gift from Extraordinary Gifts."
-      - "§eIt is a gift from Extraordinary Gifts."
+
+
+# ****----------------------------------------------****
+# **                 GIFT APPEARANCE                  **
+# ****----------------------------------------------****
+"giftMessage":
+  "maxMessageLength": 100
+  "maxWordLength": 22
+  "maxLineLength": 35
+  "forbiddenWords":
+    - "nigga"
+    - "negr"
+    - "shit"
+    - "fuck"
+  "forbiddenLetters":
+    - "°"
+    - ";"
+    - "´"

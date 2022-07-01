@@ -63,9 +63,12 @@ public class GiftAppearanceMenuEvent implements Listener {
                 NamespacedKey key = new NamespacedKey(plugin, "gift");
 
                 if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("gift")) {
+
                     Gift.create((Player) e.getWhoClicked(), currentItem);
 
                     e.getWhoClicked().closeInventory();
+
+
                     return;
                 }
             }
