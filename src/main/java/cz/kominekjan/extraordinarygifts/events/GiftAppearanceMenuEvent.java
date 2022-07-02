@@ -23,8 +23,6 @@ public class GiftAppearanceMenuEvent implements Listener {
             Items.giftAppearanceMenuCancel,
     };
 
-    private static final ArrayList<ItemStack> giftAppearanceMenuGiftArray = Items.giftsArray;
-
     private static void cancel(ArrayList<ItemStack> items, Player p) {
         //noinspection DuplicatedCode
         for (ItemStack item : items) {
@@ -58,20 +56,18 @@ public class GiftAppearanceMenuEvent implements Listener {
             return;
         }
 
-        for (ItemStack gift : giftAppearanceMenuGiftArray) {
-            if (Objects.equals(currentItem.toString(), gift.toString())) {
-                NamespacedKey key = new NamespacedKey(plugin, "gift");
+        try {
+            NamespacedKey namespacedKey = new NamespacedKey(plugin, "gift");
 
-                if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("gift")) {
+            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals("gift")) {
+                Gift.create((Player) e.getWhoClicked(), currentItem);
 
-                    Gift.create((Player) e.getWhoClicked(), currentItem);
-
-                    e.getWhoClicked().closeInventory();
+                e.getWhoClicked().closeInventory();
 
 
-                    return;
-                }
+                return;
             }
+        } catch (NullPointerException ignored) {
         }
 
 

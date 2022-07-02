@@ -24,29 +24,22 @@ import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 public class GiftMenuEvent implements Listener {
 
     public static final Map<UUID, Boolean> receiveItems = new HashMap<>();
-
-    private static final ArrayList<Material> giftMenuBannedMaterials = Items.giftMenuBannedMaterials;
-
-    private static final Boolean giftMenuBanShulkerBoxes = config.getBoolean("giftInventory.banShulkerBoxes");
-
-    private static final Set<Material> shulkerBoxTags = Tag.SHULKER_BOXES.getValues();
-
-    private static final ItemStack[] giftMenuNeutralItems = {
-            Items.giftMenuNeutral,
-    };
-
-    private static final ItemStack[] giftMenuAcceptItem = {
-            Items.giftMenuAccept,
-    };
-
-    private static final ItemStack[] giftMenuCancelItem = {
-            Items.giftMenuCancel,
-    };
-
     public static final ItemStack[] giftMenuRemoveItems = {
             Items.giftMenuNeutral,
             Items.giftMenuAccept,
             Items.giftMenuCancel
+    };
+    private static final ArrayList<Material> giftMenuBannedMaterials = Items.giftMenuBannedMaterials;
+    private static final Boolean giftMenuBanShulkerBoxes = config.getBoolean("giftInventory.banShulkerBoxes");
+    private static final Set<Material> shulkerBoxTags = Tag.SHULKER_BOXES.getValues();
+    private static final ItemStack[] giftMenuNeutralItems = {
+            Items.giftMenuNeutral,
+    };
+    private static final ItemStack[] giftMenuAcceptItem = {
+            Items.giftMenuAccept,
+    };
+    private static final ItemStack[] giftMenuCancelItem = {
+            Items.giftMenuCancel,
     };
 
     private static ArrayList<ItemStack> removeGiftMenuItems(ItemStack[] items) {
@@ -126,7 +119,8 @@ public class GiftMenuEvent implements Listener {
                 e.setCancelled(true);
                 return;
             }
-        } catch (NullPointerException ignored) {}
+        } catch (NullPointerException ignored) {
+        }
 
         if (e.getClickedInventory() == e.getWhoClicked().getInventory() && Objects.requireNonNull(e.getClickedInventory()).contains(currentItem)) {
             return;

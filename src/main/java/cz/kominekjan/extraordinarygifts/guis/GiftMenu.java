@@ -11,11 +11,11 @@ import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 
 @SuppressWarnings("NullableProblems")
 public class GiftMenu implements InventoryHolder {
+    public static final String title = "Gift Menu";
     private final Inventory giftMenuInv;
     private final ItemStack neutralGlassPanel = Items.giftMenuNeutral;
     private final ItemStack acceptGlassPanel = Items.giftMenuAccept;
     private final ItemStack cancelGlassPanel = Items.giftMenuCancel;
-    public static final String title = "Gift Menu";
 
     public GiftMenu() {
         int invSize = config.getInt("giftInventory.size");

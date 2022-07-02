@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
+import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 
 public class ReloadCommand {
@@ -36,6 +37,9 @@ public class ReloadCommand {
 
         System.out.println("Reloading config.");
         plugin.reloadConfig();
+        config = plugin.getConfig();
+        config.options().copyDefaults(true);
+        plugin.saveDefaultConfig();
 
         System.out.println("ReInitializing.");
         System.out.println("Items");

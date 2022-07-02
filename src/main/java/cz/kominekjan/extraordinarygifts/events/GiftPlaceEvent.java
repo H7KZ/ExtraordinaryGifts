@@ -33,6 +33,7 @@ public class GiftPlaceEvent implements Listener {
             if (Objects.requireNonNull(Objects.requireNonNull(e.getItem().getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals("gift")) {
                 e.setCancelled(true);
             }
-        } catch (NullPointerException ignored) {}
+        } catch (NullPointerException ignored) {
+        }
     }
 }

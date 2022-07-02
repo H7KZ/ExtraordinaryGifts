@@ -44,7 +44,8 @@ public class Gift {
                     p.getInventory().addItem(item);
                 }
             });
-        } catch (NullPointerException ignored) {}
+        } catch (NullPointerException ignored) {
+        }
     }
 
     private static ItemStack addGiftContents(List<ItemStack> items, ItemStack gift) {

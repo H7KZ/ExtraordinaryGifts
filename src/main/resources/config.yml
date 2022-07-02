@@ -21,7 +21,21 @@
 #
 
 # ****----------------------------------------------****
-# **              CUSTOM GIFT INVENTORY               **
+# **                 GIFT PERMISSIONS                 **
+# ****----------------------------------------------****
+"giftPermissions":
+  "createCommand": "extraordinarygifts.gift.create"
+  "openCommand": "extraordinarygifts.gift.open"
+  "messageCommand": "extraordinarygifts.gift.message"
+  "reloadCommand": "extraordinarygifts.reload"
+  "helpCommand": "extraordinarygifts.help"
+  "egiftsCommand": "extraordinarygifts.command"
+  "allCommandsWithoutReload": "extraordinarygifts.allCommandsWithoutReload"
+  "allCommandsWithReload": "extraordinarygifts.allCommandsWithReload"
+
+
+# ****----------------------------------------------****
+# **                  GIFT INVENTORY                  **
 # ****----------------------------------------------****
 "giftInventory":
   "title": "§5§lGift Menu"
@@ -31,9 +45,9 @@
   # Materials that are NOT allowed to be put into the inventory
   # Those Materials also include the gift item itself because of possible infinity inventory
   "banShulkerBoxes": true
-  "bannedItems":
-    - "material": "BEDROCK"
-    - "material": "BARRIER"
+  "bannedMaterials":
+    - "BEDROCK"
+    - "BARRIER"
   # GUI Items
   # For no title use " " with a space NOT "" without a space
   "gui":
@@ -101,18 +115,31 @@
 
 
 # ****----------------------------------------------****
-# **                 GIFT APPEARANCE                  **
+# **              GIFT MESSAGE SETTINGS               **
+# ****----------------------------------------------****
+"giftTitle":
+  "titleColor": "§7"
+  "maxTitleLength": 40
+  "maxWordLength": 22
+  "forbiddenWords":
+    - "shit"
+    - "fuck"
+  "forbiddenLetters":
+    - '°'
+    - '´'
+
+
+# ****----------------------------------------------****
+# **              GIFT MESSAGE SETTINGS               **
 # ****----------------------------------------------****
 "giftMessage":
+  "messageColor": "§7"
   "maxMessageLength": 100
   "maxWordLength": 22
   "maxLineLength": 35
   "forbiddenWords":
-    - "nigga"
-    - "negr"
     - "shit"
     - "fuck"
   "forbiddenLetters":
-    - "°"
-    - ";"
-    - "´"
+    - '°'
+    - '´'

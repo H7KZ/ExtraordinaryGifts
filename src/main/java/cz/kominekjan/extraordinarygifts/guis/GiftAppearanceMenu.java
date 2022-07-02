@@ -9,10 +9,10 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 
 public class GiftAppearanceMenu implements InventoryHolder {
+    public static final String title = "Gift Appearance Menu";
     private final Inventory giftAppearanceMenuInv;
     private final ItemStack neutralGlassPanel = Items.giftAppearanceMenuNeutral;
     private final ItemStack cancelGlassPanel = Items.giftAppearanceMenuCancel;
-    public static final String title = "Gift Appearance Menu";
 
     public GiftAppearanceMenu() {
         ArrayList<ItemStack> gifts = Items.giftsArray;

@@ -5,6 +5,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 
@@ -53,21 +54,16 @@ public class Items {
     }
 
     private static void initGiftMenuBannedMaterials() {
-        ArrayList<Material> items = new ArrayList<>();
+        ArrayList<Material> materials = new ArrayList<>();
 
-        ArrayList<LinkedHashMap<String, String>> configBannedItems = (ArrayList<LinkedHashMap<String, String>>) config.get("giftInventory.bannedItems");
+        List<String> configBannedMaterials = config.getStringList("giftInventory.bannedMaterials");
 
-        if (configBannedItems == null) {
-            giftMenuBannedMaterials = null;
-            return;
+        for (String configBannedMaterial : configBannedMaterials) {
+            Material mat = Material.valueOf(configBannedMaterial);
+            materials.add(mat);
         }
 
-        for (LinkedHashMap<String, String> configBannedItem : configBannedItems) {
-            Material mat = Material.valueOf(configBannedItem.get("material"));
-            items.add(mat);
-        }
-
-        giftMenuBannedMaterials = items;
+        giftMenuBannedMaterials = materials;
     }
 
     private static void initGiftAppearanceMenuNeutral() {
