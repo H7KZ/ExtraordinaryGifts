@@ -26,12 +26,28 @@
 "giftPermissions":
   "createCommand": "extraordinarygifts.gift.create"
   "openCommand": "extraordinarygifts.gift.open"
+  "titleCommand": "extraordinarygifts.gift.title"
   "messageCommand": "extraordinarygifts.gift.message"
   "reloadCommand": "extraordinarygifts.reload"
   "helpCommand": "extraordinarygifts.help"
   "egiftsCommand": "extraordinarygifts.command"
   "allCommandsWithoutReload": "extraordinarygifts.allCommandsWithoutReload"
   "allCommandsWithReload": "extraordinarygifts.allCommandsWithReload"
+
+
+# ****----------------------------------------------****
+# **                  GIFT INVENTORY                  **
+# ****----------------------------------------------****
+"giftCost":
+  "enabled": true
+  "shulkerBox": true
+  "options":
+    - "material": "DIAMOND"
+      "amount": 10
+    - "material": "GOLD"
+      "amount": 25
+    - "material": "IRON"
+      "amount": 40
 
 
 # ****----------------------------------------------****
@@ -118,7 +134,7 @@
 # **              GIFT MESSAGE SETTINGS               **
 # ****----------------------------------------------****
 "giftTitle":
-  "titleColor": "§7"
+  "titleColor": "§d§l"
   "maxTitleLength": 40
   "maxWordLength": 22
   "forbiddenWords":

@@ -1,12 +1,7 @@
 package cz.kominekjan.extraordinarygifts.commands.all;
 
-import cz.kominekjan.extraordinarygifts.databases.GiftMap;
-import cz.kominekjan.extraordinarygifts.events.GiftAppearanceMenuEvent;
-import cz.kominekjan.extraordinarygifts.events.GiftMenuEvent;
-import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
-import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.initialize.Deinitialize;
-import cz.kominekjan.extraordinarygifts.messages.Disable;
+import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -22,16 +17,6 @@ public class ReloadCommand {
 
         System.out.println("Closing inventories.");
         ArrayList<Player> players = new ArrayList<>(plugin.getServer().getOnlinePlayers());
-
-        for (Player player : players) {
-            if (player.getOpenInventory().getTopInventory().getHolder() instanceof GiftMenu) {
-                Disable.givePlayersItemsBack(player);
-            }
-
-            if (player.getOpenInventory().getTopInventory().getHolder() instanceof GiftAppearanceMenu) {
-                Disable.givePlayersItemsBack(GiftMap.temporary.get(player.getUniqueId()), player);
-            }
-        }
 
         for (Player player : players) player.closeInventory();
 
@@ -52,9 +37,9 @@ public class ReloadCommand {
         Deinitialize.commands();
 
         System.out.println("Clearing temporary gifts.");
-        GiftMap.temporary.clear();
-        GiftMenuEvent.receiveItems.clear();
-        GiftAppearanceMenuEvent.receiveItems.clear();
+        Variables.GiftMap.temporary.clear();
+        Variables.GiftMenuEvent.receiveItems.clear();
+        Variables.GiftAppearanceMenuEvent.receiveItems.clear();
 
         System.out.println("Reloaded!");
     }

@@ -9,23 +9,12 @@ import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
-import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 import static cz.kominekjan.extraordinarygifts.messages.Errors.notEnoughArgs;
 import static cz.kominekjan.extraordinarygifts.messages.Errors.youMustBeAPlayer;
+import static cz.kominekjan.extraordinarygifts.variables.Variables.Permissions.*;
 
 @SuppressWarnings("NullableProblems")
 public class Commands implements CommandExecutor {
-
-    private static final String reloadCommandPermission = config.getString("giftPermissions.reloadCommand");
-    private static final String createCommandPermission = config.getString("giftPermissions.createCommand");
-    private static final String openCommandPermission = config.getString("giftPermissions.openCommand");
-    private static final String messageCommandPermission = config.getString("giftPermissions.messageCommand");
-    private static final String helpCommandPermission = config.getString("giftPermissions.helpCommand");
-    private static final String eGiftCommandPermission = config.getString("giftPermissions.egiftsCommand");
-    private static final String allCommandsWithoutReloadPermission = config.getString("giftPermissions.allCommandsWithoutReload");
-    private static final String allCommandsWithReloadPermission = config.getString("giftPermissions.allCommandsWithReload");
-    private final String[] commandNameList = {"help", "reload", "create", "open", "message"};
-
     @SuppressWarnings("ConstantConditions")
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -79,6 +68,10 @@ public class Commands implements CommandExecutor {
             case MessageCommand.commandName -> {
                 if (p.hasPermission(messageCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission))
                     MessageCommand.command(p, args);
+            }
+            case titleCommand.commandName -> {
+                if (p.hasPermission(titleCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission))
+                    titleCommand.command(p, args);
             }
             default -> p.sendMessage(ChatColor.RED + "eGifts: Unknown arguments! Please use /egifts help");
         }

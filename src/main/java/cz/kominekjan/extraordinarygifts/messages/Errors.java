@@ -4,11 +4,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static cz.kominekjan.extraordinarygifts.messages.Colors.ANSI_RED;
+import static cz.kominekjan.extraordinarygifts.variables.Variables.Colors.ANSI_RED;
+import static cz.kominekjan.extraordinarygifts.variables.Variables.Colors.ANSI_RESET;
 
 public class Errors {
-    private static final String ANSI_RESET = Colors.ANSI_RESET;
-
     public static void notEnoughArgs(Player p, String[] commandNameList) {
         p.sendMessage(ChatColor.RED + "eGifts: You must specify arguments! Available are: /eGifts + " + ChatColor.ITALIC + String.join(", ", commandNameList));
     }

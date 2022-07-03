@@ -1,8 +1,8 @@
 package cz.kominekjan.extraordinarygifts.messages;
 
-import cz.kominekjan.extraordinarygifts.databases.GiftMap;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
+import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -10,15 +10,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
-import static cz.kominekjan.extraordinarygifts.events.GiftMenuEvent.giftMenuRemoveItems;
+import static cz.kominekjan.extraordinarygifts.variables.Variables.Colors.ANSI_PURPLE;
+import static cz.kominekjan.extraordinarygifts.variables.Variables.Colors.ANSI_RESET;
+import static cz.kominekjan.extraordinarygifts.variables.Variables.GiftMenuEvent.giftMenuRemoveItems;
 
 public class Disable {
-    private static final String ANSI_CYAN = Colors.ANSI_PURPLE;
-
-    private static final String ANSI_RESET = Colors.ANSI_RESET;
-
     public static void closing() {
-        System.out.println(ANSI_CYAN + "ExtraordinaryGifts: has been shutdown successfully" + ANSI_RESET);
+        System.out.println(ANSI_PURPLE + "ExtraordinaryGifts: has been shutdown successfully" + ANSI_RESET);
     }
 
     public static void stopping() {
@@ -31,7 +29,7 @@ public class Disable {
             }
 
             if (player.getOpenInventory().getTopInventory().getHolder() instanceof GiftAppearanceMenu) {
-                givePlayersItemsBack(GiftMap.temporary.get(player.getUniqueId()), player);
+                givePlayersItemsBack(Variables.GiftMap.temporary.get(player.getUniqueId()), player);
             }
         }
 
@@ -59,7 +57,10 @@ public class Disable {
     }
 
     public static void givePlayersItemsBack(ArrayList<ItemStack> items, Player p) {
-        //noinspection DuplicatedCode
+        DropPlayerItems(items, p);
+    }
+
+    public static void DropPlayerItems(ArrayList<ItemStack> items, Player p) {
         for (ItemStack item : items) {
             if (p.getInventory().firstEmpty() == -1) {
                 p.getWorld().dropItem(p.getLocation(), item);
@@ -69,6 +70,6 @@ public class Disable {
             p.getInventory().addItem(item);
         }
 
-        GiftMap.temporary.remove(p.getUniqueId());
+        Variables.GiftMap.temporary.remove(p.getUniqueId());
     }
 }

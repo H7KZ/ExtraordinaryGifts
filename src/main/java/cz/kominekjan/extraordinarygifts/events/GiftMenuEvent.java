@@ -1,12 +1,9 @@
 package cz.kominekjan.extraordinarygifts.events;
 
-import cz.kominekjan.extraordinarygifts.databases.GiftMap;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
-import cz.kominekjan.extraordinarygifts.items.Items;
-import org.bukkit.Material;
+import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Tag;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,32 +13,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
-import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
+import static cz.kominekjan.extraordinarygifts.variables.Variables.GiftMenuEvent.*;
 
 public class GiftMenuEvent implements Listener {
-
-    public static final Map<UUID, Boolean> receiveItems = new HashMap<>();
-    public static final ItemStack[] giftMenuRemoveItems = {
-            Items.giftMenuNeutral,
-            Items.giftMenuAccept,
-            Items.giftMenuCancel
-    };
-    private static final ArrayList<Material> giftMenuBannedMaterials = Items.giftMenuBannedMaterials;
-    private static final Boolean giftMenuBanShulkerBoxes = config.getBoolean("giftInventory.banShulkerBoxes");
-    private static final Set<Material> shulkerBoxTags = Tag.SHULKER_BOXES.getValues();
-    private static final ItemStack[] giftMenuNeutralItems = {
-            Items.giftMenuNeutral,
-    };
-    private static final ItemStack[] giftMenuAcceptItem = {
-            Items.giftMenuAccept,
-    };
-    private static final ItemStack[] giftMenuCancelItem = {
-            Items.giftMenuCancel,
-    };
-
     private static ArrayList<ItemStack> removeGiftMenuItems(ItemStack[] items) {
         ArrayList<ItemStack> result = new ArrayList<>();
 
@@ -147,7 +126,9 @@ public class GiftMenuEvent implements Listener {
             if (isPersistentStringKeyPresent(key, "accept", currentItem)) {
                 e.setCancelled(true);
 
-                GiftMap.temporary.put(e.getWhoClicked().getUniqueId(), removeGiftMenuItems(e.getInventory().getContents()));
+                doNotReceiveItems.put(e.getWhoClicked().getUniqueId(), true);
+
+                Variables.GiftMap.temporary.put(e.getWhoClicked().getUniqueId(), removeGiftMenuItems(e.getInventory().getContents()));
 
                 GiftAppearanceMenu giftAppearanceMenu = new GiftAppearanceMenu();
 
@@ -175,9 +156,22 @@ public class GiftMenuEvent implements Listener {
             return;
         }
 
-        if (e.getInventory().getHolder() instanceof GiftMenu && receiveItems.get(e.getPlayer().getUniqueId()) != null) {
-            receiveItems.remove(e.getPlayer().getUniqueId());
+        if (!(e.getInventory().getHolder() instanceof GiftMenu)) {
+            return;
+        }
 
+        if (receiveItems.get(e.getPlayer().getUniqueId()) != null && doNotReceiveItems.get(e.getPlayer().getUniqueId()) == null) {
+            receiveItems.remove(e.getPlayer().getUniqueId());
+            cancel(e);
+            return;
+        }
+
+        if (receiveItems.get(e.getPlayer().getUniqueId()) == null && doNotReceiveItems.get(e.getPlayer().getUniqueId()) != null) {
+            doNotReceiveItems.remove(e.getPlayer().getUniqueId());
+            return;
+        }
+
+        if (receiveItems.get(e.getPlayer().getUniqueId()) == null && doNotReceiveItems.get(e.getPlayer().getUniqueId()) == null) {
             cancel(e);
         }
     }
