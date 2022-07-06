@@ -1,8 +1,8 @@
 package cz.kominekjan.extraordinarygifts.events;
 
+import cz.kominekjan.extraordinarygifts.ExtraordinaryGifts;
 import cz.kominekjan.extraordinarygifts.gift.Gift;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
-import cz.kominekjan.extraordinarygifts.messages.Disable;
 import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -22,7 +22,7 @@ import static cz.kominekjan.extraordinarygifts.variables.Variables.GiftAppearanc
 
 public class GiftAppearanceMenuEvent implements Listener {
     private static void cancel(ArrayList<ItemStack> items, Player p) {
-        Disable.DropPlayerItems(items, p);
+        ExtraordinaryGifts.DropPlayerItems(items, p);
     }
 
     @EventHandler

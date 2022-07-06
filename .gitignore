@@ -17,6 +17,7 @@ target/
 
 # various other potential build files
 build/
+out/
 bin/
 dist/
 manifest.mf

@@ -13,7 +13,7 @@ import java.util.Objects;
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 import static cz.kominekjan.extraordinarygifts.variables.Variables.Title.*;
 
-public class titleCommand {
+public class TitleCommand {
     public static final String commandName = "title";
 
     public static void command(Player p, String[] args) {

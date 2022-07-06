@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static cz.kominekjan.extraordinarygifts.commands.all.titleCommand.checkForbidden;
-import static cz.kominekjan.extraordinarygifts.commands.all.titleCommand.isPlayerHoldingGift;
+import static cz.kominekjan.extraordinarygifts.commands.all.TitleCommand.checkForbidden;
+import static cz.kominekjan.extraordinarygifts.commands.all.TitleCommand.isPlayerHoldingGift;
 import static cz.kominekjan.extraordinarygifts.variables.Variables.Message.*;
 
 public class MessageCommand {

@@ -2,10 +2,12 @@ package cz.kominekjan.extraordinarygifts.initialize;
 
 import cz.kominekjan.extraordinarygifts.ExtraordinaryGifts;
 import cz.kominekjan.extraordinarygifts.commands.Commands;
+import cz.kominekjan.extraordinarygifts.commands.all.EconomyCommand;
 import cz.kominekjan.extraordinarygifts.events.GiftAppearanceMenuEvent;
 import cz.kominekjan.extraordinarygifts.events.GiftMenuEvent;
 import cz.kominekjan.extraordinarygifts.events.GiftPlaceEvent;
 import cz.kominekjan.extraordinarygifts.items.Items;
+import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.event.HandlerList;
 
 import java.util.Objects;
@@ -18,6 +20,7 @@ public class Deinitialize {
 
     public static void commands() {
         Objects.requireNonNull(plugin.getCommand("egifts")).setExecutor(new Commands());
+        EconomyCommand.contents.clear();
         System.out.println(ANSI_PURPLE + "ExtraordinaryGifts: commands have been reloaded" + ANSI_RESET);
     }
 
@@ -32,5 +35,10 @@ public class Deinitialize {
         plugin.getServer().getPluginManager().registerEvents(new GiftAppearanceMenuEvent(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new GiftPlaceEvent(), plugin);
         System.out.println(ANSI_PURPLE + "ExtraordinaryGifts: events have been reloaded" + ANSI_RESET);
+    }
+
+    public static void variables() {
+        Variables.init();
+        System.out.println(ANSI_PURPLE + "ExtraordinaryGifts: variables have been reloaded" + ANSI_RESET);
     }
 }

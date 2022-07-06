@@ -1,6 +1,7 @@
 package cz.kominekjan.extraordinarygifts.commands.all;
 
 import cz.kominekjan.extraordinarygifts.initialize.Deinitialize;
+import cz.kominekjan.extraordinarygifts.initialize.Initialize;
 import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.entity.Player;
 
@@ -29,12 +30,19 @@ public class ReloadCommand {
         System.out.println("ReInitializing.");
         System.out.println("Items");
         Deinitialize.items();
+        Initialize.items();
+
+        System.out.println("Variables");
+        Deinitialize.variables();
+        Initialize.variables();
 
         System.out.println("Events");
         Deinitialize.events();
+        Initialize.events();
 
         System.out.println("Commands");
         Deinitialize.commands();
+        Initialize.commands();
 
         System.out.println("Clearing temporary gifts.");
         Variables.GiftMap.temporary.clear();

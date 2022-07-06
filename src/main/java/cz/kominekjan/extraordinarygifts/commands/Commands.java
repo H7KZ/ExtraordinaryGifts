@@ -11,6 +11,7 @@ import java.util.Objects;
 
 import static cz.kominekjan.extraordinarygifts.messages.Errors.notEnoughArgs;
 import static cz.kominekjan.extraordinarygifts.messages.Errors.youMustBeAPlayer;
+import static cz.kominekjan.extraordinarygifts.variables.Variables.Commands.commandNameList;
 import static cz.kominekjan.extraordinarygifts.variables.Variables.Permissions.*;
 
 @SuppressWarnings("NullableProblems")
@@ -69,9 +70,13 @@ public class Commands implements CommandExecutor {
                 if (p.hasPermission(messageCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission))
                     MessageCommand.command(p, args);
             }
-            case titleCommand.commandName -> {
+            case TitleCommand.commandName -> {
                 if (p.hasPermission(titleCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission))
-                    titleCommand.command(p, args);
+                    TitleCommand.command(p, args);
+            }
+            case EconomyCommand.commandName -> {
+                if (p.hasPermission(economyCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission))
+                    EconomyCommand.command(p);
             }
             default -> p.sendMessage(ChatColor.RED + "eGifts: Unknown arguments! Please use /egifts help");
         }

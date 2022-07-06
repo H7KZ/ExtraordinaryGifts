@@ -10,64 +10,108 @@ import java.util.*;
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 
 public class Variables {
+    @SuppressWarnings("unchecked")
+    public static void init() {
+        Economy.enabled = config.getBoolean("economy.enabled");
+        Economy.Gift.enabled = config.getBoolean("economy.gift.enabled");
+        Economy.Gift.useShulkerBox = config.getBoolean("economy.gift.shulkerBox");
+        Economy.Gift.possiblePaymentMethods = (ArrayList<LinkedHashMap<String, String>>) config.get("economy.gift.options");
+
+        Message.maxMessageLength = config.getInt("giftMessage.maxMessageLength");
+        Message.maxWordLength = config.getInt("giftMessage.maxWordLength");
+        Message.maxLineLength = config.getInt("giftMessage.maxLineLength");
+        Message.forbiddenWords = config.getStringList("giftMessage.forbiddenWords");
+        Message.forbiddenLetters = config.getCharacterList("giftMessage.forbiddenLetters");
+        Message.messageColor = config.getString("giftMessage.messageColor");
+
+        Title.maxTitleLength = config.getInt("giftTitle.maxTitleLength");
+        Title.maxWordLength = config.getInt("giftTitle.maxWordLength");
+        Title.forbiddenWords = config.getStringList("giftTitle.forbiddenWords");
+        Title.forbiddenLetters = config.getCharacterList("giftTitle.forbiddenLetters");
+        Title.titleColor = config.getString("giftTitle.titleColor");
+
+        Permissions.reloadCommandPermission = config.getString("giftPermissions.reloadCommand");
+        Permissions.createCommandPermission = config.getString("giftPermissions.createCommand");
+        Permissions.openCommandPermission = config.getString("giftPermissions.openCommand");
+        Permissions.titleCommandPermission = config.getString("giftPermissions.titleCommand");
+        Permissions.messageCommandPermission = config.getString("giftPermissions.messageCommand");
+        Permissions.helpCommandPermission = config.getString("giftPermissions.helpCommand");
+        Permissions.economyCommandPermission = config.getString("giftPermissions.economyCommand");
+        Permissions.eGiftCommandPermission = config.getString("giftPermissions.egiftsCommand");
+        Permissions.allCommandsWithoutReloadPermission = config.getString("giftPermissions.allCommandsWithoutReload");
+        Permissions.allCommandsWithReloadPermission = config.getString("giftPermissions.allCommandsWithReload");
+
+        GiftMenuEvent.giftMenuRemoveItems = new ItemStack[]{Items.giftMenuNeutral, Items.giftMenuAccept, Items.giftMenuCancel};
+        GiftMenuEvent.giftMenuBannedMaterials = Items.giftMenuBannedMaterials;
+        GiftMenuEvent.giftMenuBanShulkerBoxes = config.getBoolean("giftInventory.banShulkerBoxes");
+        GiftMenuEvent.giftMenuNeutralItems = new ItemStack[]{Items.giftMenuNeutral,};
+        GiftMenuEvent.giftMenuAcceptItem = new ItemStack[]{Items.giftMenuAccept,};
+        GiftMenuEvent.giftMenuCancelItem = new ItemStack[]{Items.giftMenuCancel,};
+
+        GiftAppearanceMenuEvent.giftAppearanceMenuCancelItems = new ItemStack[]{Items.giftAppearanceMenuCancel,};
+    }
+
+    public static class Economy {
+        public static Boolean enabled;
+        public static class Gift {
+            public static Boolean enabled;
+
+            public static Boolean useShulkerBox;
+
+            public static ArrayList<LinkedHashMap<String, String>> possiblePaymentMethods;
+        }
+    }
+
     public static class Message {
-        public static final int maxMessageLength = config.getInt("giftMessage.maxMessageLength");
-        public static final int maxWordLength = config.getInt("giftMessage.maxWordLength");
-        public static final int maxLineLength = config.getInt("giftMessage.maxLineLength");
-        public static final List<String> forbiddenWords = config.getStringList("giftMessage.forbiddenWords");
-        public static final List<Character> forbiddenLetters = config.getCharacterList("giftMessage.forbiddenLetters");
-        public static final String messageColor = config.getString("giftMessage.messageColor");
+        public static int maxMessageLength;
+        public static int maxWordLength;
+        public static int maxLineLength;
+        public static List<String> forbiddenWords;
+        public static List<Character> forbiddenLetters;
+        public static String messageColor;
     }
 
     public static class Title {
-        public static final int maxTitleLength = config.getInt("giftTitle.maxTitleLength");
-        public static final int maxWordLength = config.getInt("giftTitle.maxWordLength");
-        public static final List<String> forbiddenWords = config.getStringList("giftTitle.forbiddenWords");
-        public static final List<Character> forbiddenLetters = config.getCharacterList("giftTitle.forbiddenLetters");
-        public static final String titleColor = config.getString("giftTitle.titleColor");
+        public static int maxTitleLength;
+        public static int maxWordLength;
+        public static List<String> forbiddenWords;
+        public static List<Character> forbiddenLetters;
+        public static String titleColor;
+    }
+
+    public static class Commands {
+        public static final String[] commandNameList = {"help", "reload", "create", "open", "title", "message", "economy"};
     }
 
     public static class Permissions {
-        public static final String reloadCommandPermission = config.getString("giftPermissions.reloadCommand");
-        public static final String createCommandPermission = config.getString("giftPermissions.createCommand");
-        public static final String openCommandPermission = config.getString("giftPermissions.openCommand");
-        public static final String titleCommandPermission = config.getString("giftPermissions.titleCommand");
-        public static final String messageCommandPermission = config.getString("giftPermissions.messageCommand");
-        public static final String helpCommandPermission = config.getString("giftPermissions.helpCommand");
-        public static final String eGiftCommandPermission = config.getString("giftPermissions.egiftsCommand");
-        public static final String allCommandsWithoutReloadPermission = config.getString("giftPermissions.allCommandsWithoutReload");
-        public static final String allCommandsWithReloadPermission = config.getString("giftPermissions.allCommandsWithReload");
-        public static final String[] commandNameList = {"help", "reload", "create", "open", "title", "message"};
+        public static String reloadCommandPermission;
+        public static String createCommandPermission;
+        public static String openCommandPermission;
+        public static String titleCommandPermission;
+        public static String messageCommandPermission;
+        public static String helpCommandPermission;
+        public static String economyCommandPermission;
+        public static String eGiftCommandPermission;
+        public static String allCommandsWithoutReloadPermission;
+        public static String allCommandsWithReloadPermission;
     }
 
     public static class GiftMenuEvent {
         public static final Map<UUID, Boolean> receiveItems = new HashMap<>();
         public static final Map<UUID, Boolean> doNotReceiveItems = new HashMap<>();
-        public static final ItemStack[] giftMenuRemoveItems = {
-                Items.giftMenuNeutral,
-                Items.giftMenuAccept,
-                Items.giftMenuCancel
-        };
-        public static final ArrayList<Material> giftMenuBannedMaterials = Items.giftMenuBannedMaterials;
-        public static final Boolean giftMenuBanShulkerBoxes = config.getBoolean("giftInventory.banShulkerBoxes");
         public static final Set<Material> shulkerBoxTags = Tag.SHULKER_BOXES.getValues();
-        public static final ItemStack[] giftMenuNeutralItems = {
-                Items.giftMenuNeutral,
-        };
-        public static final ItemStack[] giftMenuAcceptItem = {
-                Items.giftMenuAccept,
-        };
-        public static final ItemStack[] giftMenuCancelItem = {
-                Items.giftMenuCancel,
-        };
+        public static ItemStack[] giftMenuRemoveItems;
+        public static ArrayList<Material> giftMenuBannedMaterials;
+        public static Boolean giftMenuBanShulkerBoxes;
+        public static ItemStack[] giftMenuNeutralItems;
+        public static ItemStack[] giftMenuAcceptItem;
+        public static ItemStack[] giftMenuCancelItem;
     }
 
     public static class GiftAppearanceMenuEvent {
         public static final Map<UUID, Boolean> receiveItems = new HashMap<>();
         public static final Map<UUID, Boolean> doNotReceiveItems = new HashMap<>();
-        public static final ItemStack[] giftAppearanceMenuCancelItems = {
-                Items.giftAppearanceMenuCancel,
-        };
+        public static ItemStack[] giftAppearanceMenuCancelItems;
     }
 
     public static class GiftMap {

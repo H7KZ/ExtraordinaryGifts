@@ -30,6 +30,7 @@
   "messageCommand": "extraordinarygifts.gift.message"
   "reloadCommand": "extraordinarygifts.reload"
   "helpCommand": "extraordinarygifts.help"
+  "economyCommand": "extraordinarygifts.economy"
   "egiftsCommand": "extraordinarygifts.command"
   "allCommandsWithoutReload": "extraordinarygifts.allCommandsWithoutReload"
   "allCommandsWithReload": "extraordinarygifts.allCommandsWithReload"
@@ -38,16 +39,18 @@
 # ****----------------------------------------------****
 # **                  GIFT INVENTORY                  **
 # ****----------------------------------------------****
-"giftCost":
+"economy":
   "enabled": true
-  "shulkerBox": true
-  "options":
-    - "material": "DIAMOND"
-      "amount": 10
-    - "material": "GOLD"
-      "amount": 25
-    - "material": "IRON"
-      "amount": 40
+  "gift":
+    "enabled": true
+    "shulkerBox": true
+    "options":
+      - "material": "DIAMOND"
+        "amount": "10"
+      - "material": "GOLD_INGOT"
+        "amount": "25"
+      - "material": "IRON_INGOT"
+        "amount": "40"
 
 
 # ****----------------------------------------------****
