@@ -1,6 +1,7 @@
 package cz.kominekjan.extraordinarygifts.events;
 
 import cz.kominekjan.extraordinarygifts.ExtraordinaryGifts;
+import cz.kominekjan.extraordinarygifts.economy.GiftEconomy;
 import cz.kominekjan.extraordinarygifts.gift.Gift;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.variables.Variables;
@@ -22,6 +23,8 @@ import static cz.kominekjan.extraordinarygifts.variables.Variables.GiftAppearanc
 
 public class GiftAppearanceMenuEvent implements Listener {
     private static void cancel(ArrayList<ItemStack> items, Player p) {
+        GiftEconomy.Gift.returnBalance(p);
+
         ExtraordinaryGifts.DropPlayerItems(items, p);
     }
 

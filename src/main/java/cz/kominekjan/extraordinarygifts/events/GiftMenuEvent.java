@@ -1,5 +1,6 @@
 package cz.kominekjan.extraordinarygifts.events;
 
+import cz.kominekjan.extraordinarygifts.economy.GiftEconomy;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.variables.Variables;
@@ -37,6 +38,9 @@ public class GiftMenuEvent implements Listener {
 
     private static void cancel(InventoryCloseEvent e) {
         Player p = (Player) e.getPlayer();
+
+        GiftEconomy.Gift.returnBalance(p);
+
         for (ItemStack item : e.getInventory().getContents()) {
             //noinspection DuplicatedCode
             if (Arrays.asList(giftMenuRemoveItems).contains(item) || item == null) {

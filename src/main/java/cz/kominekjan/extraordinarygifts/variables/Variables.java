@@ -53,6 +53,7 @@ public class Variables {
 
     public static class Economy {
         public static Boolean enabled;
+
         public static class Gift {
             public static Boolean enabled;
 

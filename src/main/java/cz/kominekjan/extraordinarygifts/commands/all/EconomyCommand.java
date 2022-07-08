@@ -1,6 +1,5 @@
 package cz.kominekjan.extraordinarygifts.commands.all;
 
-import cz.kominekjan.extraordinarygifts.items.Head;
 import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.entity.Player;
 
@@ -19,10 +18,12 @@ public class EconomyCommand {
             for (LinkedHashMap<String, String> payment : Variables.Economy.Gift.possiblePaymentMethods) {
                 giftCostList.add(payment.get("amount") + " " + payment.get("material"));
             }
-
             String giftCost = String.join(", ", giftCostList);
-
             contents.add("§6Gift cost: " + giftCost);
+
+            if (Variables.Economy.Gift.useShulkerBox) {
+                contents.add("§6Gift cost: Shulker boxes");
+            }
         }
     }
 
