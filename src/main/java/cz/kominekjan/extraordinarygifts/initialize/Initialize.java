@@ -1,6 +1,5 @@
 package cz.kominekjan.extraordinarygifts.initialize;
 
-import cz.kominekjan.extraordinarygifts.ExtraordinaryGifts;
 import cz.kominekjan.extraordinarygifts.commands.Commands;
 import cz.kominekjan.extraordinarygifts.commands.all.EconomyCommand;
 import cz.kominekjan.extraordinarygifts.events.GiftAppearanceMenuEvent;
@@ -12,10 +11,9 @@ import cz.kominekjan.extraordinarygifts.variables.Variables;
 import java.util.Objects;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.logger;
+import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 
 public class Initialize {
-    private static final ExtraordinaryGifts plugin = ExtraordinaryGifts.plugin;
-
     public static void commands() {
         Objects.requireNonNull(plugin.getCommand("egifts")).setExecutor(new Commands());
         EconomyCommand.init();

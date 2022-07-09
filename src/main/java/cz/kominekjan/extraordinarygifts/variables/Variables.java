@@ -1,5 +1,6 @@
 package cz.kominekjan.extraordinarygifts.variables;
 
+import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.items.Items;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -40,6 +41,10 @@ public class Variables {
         Permissions.eGiftCommandPermission = config.getString("giftPermissions.egiftsCommand");
         Permissions.allCommandsWithoutReloadPermission = config.getString("giftPermissions.allCommandsWithoutReload");
         Permissions.allCommandsWithReloadPermission = config.getString("giftPermissions.allCommandsWithReload");
+
+        GiftMenu.title = config.getString("giftInventory.title");
+        GiftMenu.size = config.getInt("giftInventory.size");
+        GiftAppearanceMenu.title = config.getString("giftAppearance.title");
 
         GiftMenuEvent.giftMenuRemoveItems = new ItemStack[]{Items.giftMenuNeutral, Items.giftMenuAccept, Items.giftMenuCancel};
         GiftMenuEvent.giftMenuBannedMaterials = Items.giftMenuBannedMaterials;
@@ -95,6 +100,15 @@ public class Variables {
         public static String eGiftCommandPermission;
         public static String allCommandsWithoutReloadPermission;
         public static String allCommandsWithReloadPermission;
+    }
+
+    public static class GiftMenu {
+        public static String title;
+        public static int size;
+    }
+
+    public static class GiftAppearanceMenu {
+        public static String title;
     }
 
     public static class GiftMenuEvent {

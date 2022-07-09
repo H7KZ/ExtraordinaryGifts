@@ -2,6 +2,7 @@ package cz.kominekjan.extraordinarygifts.guis;
 
 import cz.kominekjan.extraordinarygifts.items.Items;
 import cz.kominekjan.extraordinarygifts.messages.Errors;
+import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -11,14 +12,10 @@ import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 
 @SuppressWarnings("NullableProblems")
 public class GiftMenu implements InventoryHolder {
-    public static final String title = "Gift Menu";
     private final Inventory giftMenuInv;
-    private final ItemStack neutralGlassPanel = Items.giftMenuNeutral;
-    private final ItemStack acceptGlassPanel = Items.giftMenuAccept;
-    private final ItemStack cancelGlassPanel = Items.giftMenuCancel;
 
     public GiftMenu() {
-        int invSize = config.getInt("giftInventory.size");
+        int invSize = Variables.GiftMenu.size;
 
         int correctInvSize = 27;
 
@@ -33,22 +30,22 @@ public class GiftMenu implements InventoryHolder {
 
         int fullInvSize = correctInvSize + 9;
 
-        giftMenuInv = Bukkit.createInventory(this, fullInvSize, title);
+        giftMenuInv = Bukkit.createInventory(this, fullInvSize, Variables.GiftMenu.title);
         initialize(invSize, correctInvSize, fullInvSize);
     }
 
     private void initialize(int invSize, int correctInvSize, int fullInvSize) {
         for (int i = invSize; i < correctInvSize; i++) {
-            giftMenuInv.setItem(i, neutralGlassPanel);
+            giftMenuInv.setItem(i, Items.giftMenuNeutral);
         }
 
-        giftMenuInv.setItem(correctInvSize, cancelGlassPanel);
+        giftMenuInv.setItem(correctInvSize, Items.giftMenuCancel);
 
         for (int i = correctInvSize + 1; i < fullInvSize - 1; i++) {
-            giftMenuInv.setItem(i, neutralGlassPanel);
+            giftMenuInv.setItem(i, Items.giftMenuNeutral);
         }
 
-        giftMenuInv.setItem(fullInvSize - 1, acceptGlassPanel);
+        giftMenuInv.setItem(fullInvSize - 1, Items.giftMenuAccept);
     }
 
     @Override

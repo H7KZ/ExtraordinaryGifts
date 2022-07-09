@@ -1,6 +1,7 @@
 package cz.kominekjan.extraordinarygifts.guis;
 
 import cz.kominekjan.extraordinarygifts.items.Items;
+import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -9,10 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 
 public class GiftAppearanceMenu implements InventoryHolder {
-    public static final String title = "Gift Appearance Menu";
     private final Inventory giftAppearanceMenuInv;
-    private final ItemStack neutralGlassPanel = Items.giftAppearanceMenuNeutral;
-    private final ItemStack cancelGlassPanel = Items.giftAppearanceMenuCancel;
 
     public GiftAppearanceMenu() {
         ArrayList<ItemStack> gifts = Items.giftsArray;
@@ -27,15 +25,15 @@ public class GiftAppearanceMenu implements InventoryHolder {
 
         int fullInvSize = navbarSize + 9;
 
-        giftAppearanceMenuInv = Bukkit.createInventory(this, fullInvSize, title);
+        giftAppearanceMenuInv = Bukkit.createInventory(this, fullInvSize, Variables.GiftAppearanceMenu.title);
         initialize(navbarSize, fullInvSize, gifts);
     }
 
     private void initialize(int navbarSize, int fullInvSize, ArrayList<ItemStack> gifts) {
-        giftAppearanceMenuInv.setItem(navbarSize, cancelGlassPanel);
+        giftAppearanceMenuInv.setItem(navbarSize, Items.giftAppearanceMenuCancel);
 
         for (int i = navbarSize + 1; i < fullInvSize; i++) {
-            giftAppearanceMenuInv.setItem(i, neutralGlassPanel);
+            giftAppearanceMenuInv.setItem(i, Items.giftAppearanceMenuNeutral);
         }
 
         for (ItemStack gift : gifts) {
