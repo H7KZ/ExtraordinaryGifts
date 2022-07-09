@@ -16,6 +16,10 @@ import static cz.kominekjan.extraordinarygifts.variables.Variables.Permissions.*
 
 @SuppressWarnings("NullableProblems")
 public class Commands implements CommandExecutor {
+    private static void noPermission(Player p) {
+        p.sendMessage(ChatColor.RED + "eGifts: You don't have permission to use this command!");
+    }
+
     @SuppressWarnings("ConstantConditions")
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -27,19 +31,25 @@ public class Commands implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            sender.sendMessage("not enough arguments!");
+            if (sender instanceof Player) {
+                notEnoughArgs((Player) sender, commandNameList);
+            } else {
+                sender.sendMessage("eGifts: Not enough arguments!");
+            }
             return true;
         }
 
         if (Objects.equals(args[0], ReloadCommand.commandName)) {
             if (sender.hasPermission(reloadCommandPermission) || sender.hasPermission(allCommandsWithReloadPermission)) {
                 if (sender instanceof Player)
-                    sender.sendMessage(ChatColor.YELLOW + "eGifts: Reloading ...");
+                    sender.sendMessage(ChatColor.YELLOW + "eGifts: Reloading...");
                 ReloadCommand.command();
                 if (sender instanceof Player)
                     sender.sendMessage(ChatColor.GREEN + "eGifts: Successfully reloaded");
-                return true;
+            } else {
+                sender.sendMessage(ChatColor.RED + "eGifts: You don't have permission to use this command!");
             }
+            return true;
         }
 
 
@@ -55,28 +65,46 @@ public class Commands implements CommandExecutor {
 
         switch (args[0]) {
             case HelpCommand.commandName -> {
-                if (p.hasPermission(helpCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission))
+                if (p.hasPermission(helpCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission)) {
                     HelpCommand.command(p);
+                } else {
+                    noPermission(p);
+                }
             }
             case CreateCommand.commandName -> {
-                if (p.hasPermission(createCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission))
+                if (p.hasPermission(createCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission)) {
                     CreateCommand.command(p);
+                } else {
+                    noPermission(p);
+                }
             }
             case OpenCommand.commandName -> {
-                if (p.hasPermission(openCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission))
+                if (p.hasPermission(openCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission)) {
                     OpenCommand.command(p);
+                } else {
+                    noPermission(p);
+                }
             }
             case MessageCommand.commandName -> {
-                if (p.hasPermission(messageCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission))
+                if (p.hasPermission(messageCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission)) {
                     MessageCommand.command(p, args);
+                } else {
+                    noPermission(p);
+                }
             }
             case TitleCommand.commandName -> {
-                if (p.hasPermission(titleCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission))
+                if (p.hasPermission(titleCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission)) {
                     TitleCommand.command(p, args);
+                } else {
+                    noPermission(p);
+                }
             }
             case EconomyCommand.commandName -> {
-                if (p.hasPermission(economyCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission))
+                if (p.hasPermission(economyCommandPermission) || p.hasPermission(allCommandsWithoutReloadPermission) || p.hasPermission(allCommandsWithReloadPermission)) {
                     EconomyCommand.command(p);
+                } else {
+                    noPermission(p);
+                }
             }
             default -> p.sendMessage(ChatColor.RED + "eGifts: Unknown arguments! Please use /egifts help");
         }

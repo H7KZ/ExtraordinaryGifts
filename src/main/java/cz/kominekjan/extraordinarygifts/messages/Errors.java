@@ -4,8 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static cz.kominekjan.extraordinarygifts.variables.Variables.Colors.ANSI_RED;
-import static cz.kominekjan.extraordinarygifts.variables.Variables.Colors.ANSI_RESET;
+import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.logger;
 
 public class Errors {
     public static void notEnoughArgs(Player p, String[] commandNameList) {
@@ -13,14 +12,14 @@ public class Errors {
     }
 
     public static void youMustBeAPlayer(CommandSender s) {
-        s.sendMessage(ChatColor.RED + ANSI_RED + " eGifts: You must be a player! " + ANSI_RESET);
+        s.sendMessage(" eGifts: You must be a player! ");
     }
 
     public static void invalidGiftInvSize() {
-        System.out.println(ANSI_RED + " ExtraordinaryGifts: Invalid inventory size! Defaulting to 27!" + ANSI_RESET);
+        logger.warning(" ExtraordinaryGifts: Invalid inventory size! Defaulting to 27!");
     }
 
     public static void failedToSetProfileHead() {
-        System.out.println(ANSI_RED + " Failed to set profile for head." + ANSI_RESET);
+        logger.warning("ExtraordinaryGifts: Failed to set profile for head.");
     }
 }

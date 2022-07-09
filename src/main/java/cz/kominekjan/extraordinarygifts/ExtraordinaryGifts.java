@@ -1,9 +1,9 @@
 package cz.kominekjan.extraordinarygifts;
 
+import cz.kominekjan.extraordinarygifts.economy.GiftEconomy;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.initialize.Initialize;
-import cz.kominekjan.extraordinarygifts.messages.Disable;
 import cz.kominekjan.extraordinarygifts.messages.Enable;
 import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 import static cz.kominekjan.extraordinarygifts.variables.Variables.GiftMenuEvent.giftMenuRemoveItems;
 
@@ -22,13 +23,15 @@ public final class ExtraordinaryGifts extends JavaPlugin {
 
     public static FileConfiguration config;
 
+    public static Logger logger;
+
     public static void stopping() {
-        System.out.println("Closing inventories.");
+        logger.info("ExtraordinaryGifts: Closing inventories.");
         ArrayList<Player> players = new ArrayList<>(plugin.getServer().getOnlinePlayers());
 
         for (Player player : players) {
             if (player.getOpenInventory().getTopInventory().getHolder() instanceof GiftMenu) {
-                cancel(player);
+                givePlayersItemsBack(player);
             }
 
             if (player.getOpenInventory().getTopInventory().getHolder() instanceof GiftAppearanceMenu) {
@@ -37,13 +40,13 @@ public final class ExtraordinaryGifts extends JavaPlugin {
         }
 
         for (Player player : players) player.closeInventory();
-    }
 
-    private static void cancel(Player p) {
-        givePlayersItemsBack(p);
+        logger.info("ExtraordinaryGifts: All inventories closed!.");
     }
 
     public static void givePlayersItemsBack(Player p) {
+        GiftEconomy.Gift.returnBalance(p);
+
         for (ItemStack item : p.getOpenInventory().getTopInventory().getContents()) {
             //noinspection DuplicatedCode
             if (Arrays.asList(giftMenuRemoveItems).contains(item) || item == null) {
@@ -60,6 +63,8 @@ public final class ExtraordinaryGifts extends JavaPlugin {
     }
 
     public static void givePlayersItemsBack(ArrayList<ItemStack> items, Player p) {
+        GiftEconomy.Gift.returnBalance(p);
+
         DropPlayerItems(items, p);
     }
 
@@ -78,10 +83,12 @@ public final class ExtraordinaryGifts extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        plugin = this;
+
+        logger = plugin.getLogger();
+
         //STARTING UP
         Enable.starting();
-
-        plugin = this;
 
         //CONFIG FILE LOAD & COPY DEFAULTS
         config = plugin.getConfig();
@@ -110,6 +117,6 @@ public final class ExtraordinaryGifts extends JavaPlugin {
         stopping();
 
         //ENDING OF SHUTDOWN
-        Disable.closing();
+        logger.info("ExtraordinaryGifts: Shut down successfully");
     }
 }

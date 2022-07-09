@@ -11,8 +11,7 @@ import cz.kominekjan.extraordinarygifts.variables.Variables;
 
 import java.util.Objects;
 
-import static cz.kominekjan.extraordinarygifts.variables.Variables.Colors.ANSI_PURPLE;
-import static cz.kominekjan.extraordinarygifts.variables.Variables.Colors.ANSI_RESET;
+import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.logger;
 
 public class Initialize {
     private static final ExtraordinaryGifts plugin = ExtraordinaryGifts.plugin;
@@ -20,23 +19,23 @@ public class Initialize {
     public static void commands() {
         Objects.requireNonNull(plugin.getCommand("egifts")).setExecutor(new Commands());
         EconomyCommand.init();
-        System.out.println(ANSI_PURPLE + "ExtraordinaryGifts: commands have been registered" + ANSI_RESET);
+        logger.info("ExtraordinaryGifts: commands have been registered");
     }
 
     public static void items() {
         Items.init();
-        System.out.println(ANSI_PURPLE + "ExtraordinaryGifts: items have been loaded" + ANSI_RESET);
+        logger.info("ExtraordinaryGifts: items have been loaded");
     }
 
     public static void events() {
         plugin.getServer().getPluginManager().registerEvents(new GiftMenuEvent(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new GiftAppearanceMenuEvent(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new GiftPlaceEvent(), plugin);
-        System.out.println(ANSI_PURPLE + "ExtraordinaryGifts: events have been registered" + ANSI_RESET);
+        logger.info("ExtraordinaryGifts: events have been registered");
     }
 
     public static void variables() {
         Variables.init();
-        System.out.println(ANSI_PURPLE + "ExtraordinaryGifts: variables have been registered" + ANSI_RESET);
+        logger.info("ExtraordinaryGifts: variables have been registered");
     }
 }

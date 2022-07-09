@@ -81,7 +81,7 @@ public class Variables {
     }
 
     public static class Commands {
-        public static final String[] commandNameList = {"help", "reload", "create", "open", "title", "message", "economy"};
+        public static final String[] commandNameList = {"help", "reload", "create", "open", "economy", "title", "message"};
     }
 
     public static class Permissions {
@@ -117,13 +117,5 @@ public class Variables {
 
     public static class GiftMap {
         public static final Map<UUID, ArrayList<ItemStack>> temporary = new HashMap<>();
-    }
-
-    public static class Colors {
-        public static final String ANSI_RED = "\u001B[31m";
-
-        public static final String ANSI_PURPLE = "\033[0;35m";
-
-        public static final String ANSI_RESET = "\u001B[0m";
     }
 }

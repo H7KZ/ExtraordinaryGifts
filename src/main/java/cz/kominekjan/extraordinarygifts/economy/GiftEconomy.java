@@ -53,6 +53,9 @@ public class GiftEconomy {
 
         public static void returnBalance(Player p) {
             ItemStack balance = whoPaidListItemStack.get(p.getUniqueId());
+            if (balance == null) {
+                return;
+            }
             whoPaidListItemStack.remove(p.getUniqueId());
 
             if (p.getInventory().firstEmpty() == -1) {
