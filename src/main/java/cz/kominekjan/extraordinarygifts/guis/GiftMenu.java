@@ -6,9 +6,6 @@ import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemStack;
-
-import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.config;
 
 @SuppressWarnings("NullableProblems")
 public class GiftMenu implements InventoryHolder {

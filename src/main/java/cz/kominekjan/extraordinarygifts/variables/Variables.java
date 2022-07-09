@@ -1,6 +1,5 @@
 package cz.kominekjan.extraordinarygifts.variables;
 
-import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.items.Items;
 import org.bukkit.Material;
 import org.bukkit.Tag;
