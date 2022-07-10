@@ -57,7 +57,6 @@ public class GiftAppearanceMenuEvent implements Listener {
 
                 e.getWhoClicked().closeInventory();
 
-
                 return;
             }
         } catch (NullPointerException ignored) {
@@ -93,6 +92,7 @@ public class GiftAppearanceMenuEvent implements Listener {
 
         if (receiveItems.get(e.getPlayer().getUniqueId()) == null && doNotReceiveItems.get(e.getPlayer().getUniqueId()) != null) {
             doNotReceiveItems.remove(e.getPlayer().getUniqueId());
+
             return;
         }
 

@@ -44,6 +44,8 @@
   "gift":
     "enabled": true
     "shulkerBox": true
+    "giveBalanceBack": false
+    "giveShulkerBoxBack": true
     "options":
       - "material": "DIAMOND"
         "amount": "10"

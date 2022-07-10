@@ -95,11 +95,11 @@ public final class ExtraordinaryGifts extends JavaPlugin {
         config.options().copyDefaults(true);
         saveDefaultConfig();
 
-        //ITEMS LOADING
-        Initialize.items();
-
         //VARIABLES INITIALIZATION
         Initialize.variables();
+
+        //ITEMS LOADING
+        Initialize.items();
 
         //COMMAND REGISTERING
         Initialize.commands();

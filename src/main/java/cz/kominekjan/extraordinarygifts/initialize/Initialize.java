@@ -6,6 +6,7 @@ import cz.kominekjan.extraordinarygifts.events.GiftAppearanceMenuEvent;
 import cz.kominekjan.extraordinarygifts.events.GiftMenuEvent;
 import cz.kominekjan.extraordinarygifts.events.GiftPlaceEvent;
 import cz.kominekjan.extraordinarygifts.items.Items;
+import cz.kominekjan.extraordinarygifts.tabcompleter.TabCompleter;
 import cz.kominekjan.extraordinarygifts.variables.Variables;
 
 import java.util.Objects;
@@ -16,6 +17,7 @@ import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 public class Initialize {
     public static void commands() {
         Objects.requireNonNull(plugin.getCommand("egifts")).setExecutor(new Commands());
+        Objects.requireNonNull(plugin.getCommand("egifts")).setTabCompleter(new TabCompleter());
         EconomyCommand.init();
         logger.info("ExtraordinaryGifts: commands have been registered");
     }

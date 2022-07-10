@@ -16,6 +16,8 @@ public class Variables {
         Economy.Gift.enabled = config.getBoolean("economy.gift.enabled");
         Economy.Gift.useShulkerBox = config.getBoolean("economy.gift.shulkerBox");
         Economy.Gift.possiblePaymentMethods = (ArrayList<LinkedHashMap<String, String>>) config.get("economy.gift.options");
+        Economy.Gift.giveBalanceBack = config.getBoolean("economy.gift.giveBalanceBack");
+        Economy.Gift.giveShulkerBoxBack = config.getBoolean("economy.gift.giveShulkerBoxBack");
 
         Message.maxMessageLength = config.getInt("giftMessage.maxMessageLength");
         Message.maxWordLength = config.getInt("giftMessage.maxWordLength");
@@ -64,6 +66,10 @@ public class Variables {
             public static Boolean useShulkerBox;
 
             public static ArrayList<LinkedHashMap<String, String>> possiblePaymentMethods;
+
+            public static Boolean giveBalanceBack;
+
+            public static Boolean giveShulkerBoxBack;
         }
     }
 
@@ -85,7 +91,7 @@ public class Variables {
     }
 
     public static class Commands {
-        public static final String[] commandNameList = {"help", "reload", "create", "open", "economy", "title", "message"};
+        public static final String[] commandNameList = { "help", "create", "open", "economy", "title", "message" };
     }
 
     public static class Permissions {

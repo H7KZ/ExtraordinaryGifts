@@ -1,8 +1,10 @@
 package cz.kominekjan.extraordinarygifts.gift;
 
 
+import cz.kominekjan.extraordinarygifts.economy.GiftEconomy;
 import cz.kominekjan.extraordinarygifts.persistentdatatypes.PersistentDataItemStackArray;
 import cz.kominekjan.extraordinarygifts.variables.Variables;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -17,6 +19,19 @@ import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 public class Gift {
     public static void create(Player p, ItemStack giftAppearance) {
         ArrayList<ItemStack> contents = Variables.GiftMap.temporary.get(p.getUniqueId());
+
+        if (Variables.Economy.Gift.giveBalanceBack) {
+            contents.add(GiftEconomy.Gift.whoPaidListItemStack.get(p.getUniqueId()));
+        } else if (Variables.Economy.Gift.giveShulkerBoxBack) {
+            Material ifShulker = GiftEconomy.Gift.whoPaidListItemStack.get(p.getUniqueId()).getType();
+
+            for (Material shulker : Variables.GiftMenuEvent.shulkerBoxTags) {
+                if (ifShulker == shulker) {
+                    contents.add(GiftEconomy.Gift.whoPaidListItemStack.get(p.getUniqueId()));
+                    break;
+                }
+            }
+        }
 
         ItemStack gift = addGiftContents(contents, giftAppearance);
 

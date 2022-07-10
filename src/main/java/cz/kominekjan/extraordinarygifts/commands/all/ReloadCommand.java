@@ -27,14 +27,14 @@ public class ReloadCommand {
         config.options().copyDefaults(true);
         plugin.saveDefaultConfig();
 
+        logger.info("ExtraordinaryGifts: ReInitializing Variables");
+        Deinitialize.variables();
+        Initialize.variables();
+
         logger.info("ExtraordinaryGifts: ReInitializing.");
         logger.info("ExtraordinaryGifts: ReInitializing Items");
         Deinitialize.items();
         Initialize.items();
-
-        logger.info("ExtraordinaryGifts: ReInitializing Variables");
-        Deinitialize.variables();
-        Initialize.variables();
 
         logger.info("ExtraordinaryGifts: Clearing temporary gifts.");
         Variables.GiftMap.temporary.clear();
