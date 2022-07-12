@@ -35,7 +35,9 @@ public class GiftEconomy {
                 for (Material shulker : Variables.GiftMenuEvent.shulkerBoxTags) {
                     if (itemInMainHand.getType() == shulker) {
                         whoPaidListItemStack.put(p.getUniqueId(), itemInMainHand);
+
                         p.getInventory().removeItem(itemInMainHand);
+
                         return;
                     }
                 }
@@ -44,8 +46,11 @@ public class GiftEconomy {
             for (LinkedHashMap<String, String> method : Variables.Economy.Gift.possiblePaymentMethods) {
                 if (checkIfHasEnoughBalance(itemInMainHand, method)) {
                     itemInMainHand.setAmount(itemInMainHand.getAmount() - Integer.parseInt(method.get("amount")));
+
                     ItemStack balance = new ItemStack(Material.valueOf(method.get("material")), Integer.parseInt(method.get("amount")));
+
                     whoPaidListItemStack.put(p.getUniqueId(), balance);
+
                     return;
                 }
             }
@@ -60,6 +65,7 @@ public class GiftEconomy {
 
             if (p.getInventory().firstEmpty() == -1) {
                 p.getWorld().dropItem(p.getLocation(), balance);
+
                 return;
             }
             p.getInventory().addItem(balance);

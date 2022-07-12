@@ -70,11 +70,6 @@
             <id>velocity</id>
             <url>https://nexus.velocitypowered.com/repository/maven-public/</url>
         </repository>
-        <repository>
-            <id>decalium-repository-releases</id>
-            <name>Decalium Network Repository</name>
-            <url>https://repo.decalium.ru/releases</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -90,11 +85,6 @@
             <artifactId>authlib</artifactId>
             <version>3.5.41</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.manya</groupId>
-            <artifactId>persistent-data-types</artifactId>
-            <version>1.0.22</version>
         </dependency>
     </dependencies>
 </project>

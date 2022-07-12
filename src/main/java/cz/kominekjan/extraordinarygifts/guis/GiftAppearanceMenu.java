@@ -26,6 +26,7 @@ public class GiftAppearanceMenu implements InventoryHolder {
         int fullInvSize = navbarSize + 9;
 
         giftAppearanceMenuInv = Bukkit.createInventory(this, fullInvSize, Variables.GiftAppearanceMenu.title);
+
         initialize(navbarSize, fullInvSize, gifts);
     }
 

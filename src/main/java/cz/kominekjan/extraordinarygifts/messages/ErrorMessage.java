@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.logger;
 
-public class Errors {
+public class ErrorMessage {
     public static void notEnoughArgs(Player p, String[] commandNameList) {
         p.sendMessage(ChatColor.RED + "eGifts: You must specify arguments! Available are: /eGifts + " + ChatColor.ITALIC + String.join(", ", commandNameList));
     }

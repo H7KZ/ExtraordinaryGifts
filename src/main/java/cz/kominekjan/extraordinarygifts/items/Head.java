@@ -2,7 +2,7 @@ package cz.kominekjan.extraordinarygifts.items;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import cz.kominekjan.extraordinarygifts.messages.Errors;
+import cz.kominekjan.extraordinarygifts.messages.ErrorMessage;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -21,6 +21,7 @@ public class Head {
         SkullMeta headMeta = (SkullMeta) head.getItemMeta();
 
         assert headMeta != null;
+
         headMeta.setDisplayName(name);
 
         NamespacedKey namespacedKey = new NamespacedKey(plugin, key);
@@ -33,6 +34,7 @@ public class Head {
     private static ItemStack setCustomHead(String uuid, ItemStack head, SkullMeta headMeta) {
         if (uuid == null || uuid.trim().equals("")) {
             head.setItemMeta(headMeta);
+
             return head;
         }
 
@@ -44,11 +46,14 @@ public class Head {
 
         try {
             profileField = headMeta.getClass().getDeclaredField("profile");
+
             profileField.setAccessible(true);
+
             profileField.set(headMeta, profile);
         } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException e) {
             e.printStackTrace();
-            Errors.failedToSetProfileHead();
+
+            ErrorMessage.failedToSetProfileHead();
         }
 
         head.setItemMeta(headMeta);

@@ -1,6 +1,5 @@
 package cz.kominekjan.extraordinarygifts.events;
 
-import cz.kominekjan.extraordinarygifts.ExtraordinaryGifts;
 import cz.kominekjan.extraordinarygifts.economy.GiftEconomy;
 import cz.kominekjan.extraordinarygifts.gift.Gift;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
@@ -15,17 +14,18 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
-import static cz.kominekjan.extraordinarygifts.variables.Variables.GiftAppearanceMenuEvent.*;
+import static cz.kominekjan.extraordinarygifts.items.Items.DropPlayerItems;
+import static cz.kominekjan.extraordinarygifts.variables.Variables.GiftAppearanceMenuEvent.doNotReceiveItems;
+import static cz.kominekjan.extraordinarygifts.variables.Variables.GiftAppearanceMenuEvent.receiveItems;
 
 public class GiftAppearanceMenuEvent implements Listener {
     private static void cancel(ArrayList<ItemStack> items, Player p) {
         GiftEconomy.Gift.returnBalance(p);
 
-        ExtraordinaryGifts.DropPlayerItems(items, p);
+        DropPlayerItems(items, p);
     }
 
     @EventHandler
@@ -47,10 +47,12 @@ public class GiftAppearanceMenuEvent implements Listener {
             return;
         }
 
+        // GIFT
         try {
             NamespacedKey namespacedKey = new NamespacedKey(plugin, "gift");
 
             if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals("gift")) {
+
                 doNotReceiveItems.put(e.getWhoClicked().getUniqueId(), true);
 
                 Gift.create((Player) e.getWhoClicked(), currentItem);
@@ -62,15 +64,17 @@ public class GiftAppearanceMenuEvent implements Listener {
         } catch (NullPointerException ignored) {
         }
 
+        // CANCEL
+        try {
+            NamespacedKey namespacedKey = new NamespacedKey(plugin, "cancel");
 
-        if (Arrays.asList(giftAppearanceMenuCancelItems).contains(currentItem)) {
-            NamespacedKey key = new NamespacedKey(plugin, "cancel");
+            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals("cancel")) {
 
-            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals("cancel")) {
                 receiveItems.put(e.getWhoClicked().getUniqueId(), true);
 
                 e.getWhoClicked().closeInventory();
             }
+        } catch (NullPointerException ignored) {
         }
     }
 

@@ -1,51 +1,63 @@
-#        ______     __                            ___                        _______ ______
-#      / ____/  __/ /__________ _____  _________/ (_)___  ____ ________  __/ ____(_) __/ /______
-#     / __/ | |/_/ __/ ___/ __ `/ __ \/ ___/ __  / / __ \/ __ `/ ___/ / / / / __/ / /_/ __/ ___/
-#    / /____>  </ /_/ /  / /_/ / /_/ / /  / /_/ / / / / / /_/ / /  / /_/ / /_/ / / __/ /_(__  )
-#   /_____/_/|_|\__/_/   \__,_/\____/_/   \__,_/_/_/ /_/\__,_/_/   \__, /\____/_/_/  \__/____/
-#      ______            _____          _______ __     __         /____/
-#     / ____/___  ____  / __(_)___ _   / ____(_) /__  / /
-#    / /   / __ \/ __ \/ /_/ / __ `/  / /_  / / / _ \/ /
-#   / /___/ /_/ / / / / __/ / /_/ /  / __/ / / /  __/_/
-#   \____/\____/_/ /_/_/ /_/\__, /  /_/   /_/_/\___(_)
-#                            /____/
+#
+#
+#
 #   --------------------------------------------------------------
-#   |               ExtraordinaryGifts Config file               |
+#   |                 ExtraordinaryGifts Plugin                  |
 #   |   copyright (c) 2022 by Jan Komínek. All rights reserved.  |
+#   |      More about a license on my github. Username: H7KZ     |
 #   --------------------------------------------------------------
 #
-#   PLEASE DO NOT USE /RELOAD TO RELOAD THE PLUGIN!!!!!
-#   THERE IS A BUILT IN COMMAND FOR RELOAD! /eGifts reload
-#   IF YOU WON'T USE THIS INTERNAL COMMAND THERE IS A RISK OF HAVING A BUG AND PUTTING BUGGED ITEMS INTO YOUR INVENTORY!
-#   THIS BUG IS NOT DONE BY ME, IT IS A BUG IN THE SPIGOT IT SELF! BE CAREFUL!
+#
 #
 
 # ****----------------------------------------------****
 # **                 GIFT PERMISSIONS                 **
 # ****----------------------------------------------****
-"giftPermissions":
-  "createCommand": "extraordinarygifts.gift.create"
-  "openCommand": "extraordinarygifts.gift.open"
-  "titleCommand": "extraordinarygifts.gift.title"
-  "messageCommand": "extraordinarygifts.gift.message"
-  "reloadCommand": "extraordinarygifts.reload"
-  "helpCommand": "extraordinarygifts.help"
-  "economyCommand": "extraordinarygifts.economy"
-  "egiftsCommand": "extraordinarygifts.command"
-  "allCommandsWithoutReload": "extraordinarygifts.allCommandsWithoutReload"
-  "allCommandsWithReload": "extraordinarygifts.allCommandsWithReload"
+# CREATE GIFT PERMISSION
+# [extraordinarygifts.gift.create]
+# -----
+# OPEN GIFT PERMISSION
+# [extraordinarygifts.gift.open]
+# -----
+# SET GIFT TITLE PERMISSION
+# [extraordinarygifts.gift.title]
+# -----
+# SET GIFT MESSAGE PERMISSION
+# [extraordinarygifts.gift.message]
+# -----
+# RELOAD PLUGIN PERMISSION
+# [extraordinarygifts.plugin.reload]
+# -----
+# COMMAND HELP PERMISSION
+# [extraordinarygifts.command.help]
+# -----
+# COMMAND ECONOMY PERMISSION
+# [extraordinarygifts.command.economy]
+# -----
+# COMMAND EGIFT PERMISSION
+# [extraordinarygifts.command.egift]
+# -----
+# ALL COMMANDS BUT WITHOUT A RELOAD COMMAND PERMISSION
+# [extraordinarygifts.command.allCommandsWithoutReload]
+# -----
+# ALL COMMANDS PERMISSION
+# [extraordinarygifts.command.allCommandsWithReload]
 
 
 # ****----------------------------------------------****
 # **                  GIFT INVENTORY                  **
 # ****----------------------------------------------****
 "economy":
+  # Enable economy
   "enabled": true
+  # Gift economy
   "gift":
+    # Enable gift economy
     "enabled": true
+    # Allow shulker boxes as "money"
     "shulkerBox": true
-    "giveBalanceBack": false
-    "giveShulkerBoxBack": true
+    # List of items that can be used as "money"
+    # Material + amount (max amount is 64 like a stack of blocks)
     "options":
       - "material": "DIAMOND"
         "amount": "10"
@@ -53,6 +65,11 @@
         "amount": "25"
       - "material": "IRON_INGOT"
         "amount": "40"
+    # Give "money" (Material + amount [the list ^]) back to the player when he opens the gift
+    "giveBalanceBack": false
+    # Give "money" (Shulker box) back to the player when he opens the gift
+    "giveShulkerBoxBack": true
+
 
 
 # ****----------------------------------------------****
@@ -71,6 +88,8 @@
     - "BARRIER"
   # GUI Items
   # For no title use " " with a space NOT "" without a space
+  # You can set following properties:
+  # Material, text and enchantment
   "gui":
     "acceptButton":
       "material": "GREEN_STAINED_GLASS_PANE"
@@ -118,6 +137,10 @@
       "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGQyOWIwNmM3YzM3Y2JkMmE3NjU5MDgyNzdmYThlYWQwZTRkYzY2YTExM2YzNDdkZTNiYWI5MWZhZGU0NjkxMiJ9fX0="
     - "name": "§5§lPurple gift"
       "texture": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjBiNDVjYmZiZGZiNmRjNjY5NGRlOTZkOTdkYTM2YWU3YjVmZTNjZDk0YTViMjYyNTA1NTRjNWYwMjJjYTdkMCJ9fX0="
+  # GUI Appearance Items
+  # For no title use " " with a space NOT "" without a space
+  # You can set following properties:
+  # Material, text and enchantment
   "gui":
     "acceptButton":
       "material": "GREEN_STAINED_GLASS_PANE"
@@ -131,20 +154,24 @@
       "material": "GRAY_STAINED_GLASS_PANE"
       "text": " "
       "enchanted": false
-  "itemSettings":
-    "name": "§6Extraordinary Gift"
 
 
 # ****----------------------------------------------****
-# **              GIFT MESSAGE SETTINGS               **
+# **               GIFT TITLE SETTINGS                **
 # ****----------------------------------------------****
+# Default values for the gift title
 "giftTitle":
+  # Default color of the title
   "titleColor": "§d§l"
+  # Maximum length of the title
   "maxTitleLength": 40
+  # Maximum word length of the title
   "maxWordLength": 22
+  # Forbidden words in the title
   "forbiddenWords":
     - "shit"
     - "fuck"
+  # Forbidden characters in the title
   "forbiddenLetters":
     - '°'
     - '´'
@@ -153,14 +180,21 @@
 # ****----------------------------------------------****
 # **              GIFT MESSAGE SETTINGS               **
 # ****----------------------------------------------****
+# Default values for the gift message
 "giftMessage":
+  # Default color of the message
   "messageColor": "§7"
+  # Maximum length of the message
   "maxMessageLength": 100
+  # Maximum word length of the message
   "maxWordLength": 22
+  # Maximum line length of the message
   "maxLineLength": 35
+  # Forbidden words in the message
   "forbiddenWords":
     - "shit"
     - "fuck"
+  # Forbidden characters in the message
   "forbiddenLetters":
     - '°'
     - '´'

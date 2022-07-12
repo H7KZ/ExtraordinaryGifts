@@ -2,19 +2,22 @@ package cz.kominekjan.extraordinarygifts.gift;
 
 
 import cz.kominekjan.extraordinarygifts.economy.GiftEconomy;
-import cz.kominekjan.extraordinarygifts.persistentdatatypes.PersistentDataItemStackArray;
 import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
+import static cz.kominekjan.extraordinarygifts.validateAndFormat.TitleMessageValidate.isPlayerHoldingGift;
 
 public class Gift {
     public static void create(Player p, ItemStack giftAppearance) {
@@ -28,6 +31,7 @@ public class Gift {
             for (Material shulker : Variables.GiftMenuEvent.shulkerBoxTags) {
                 if (ifShulker == shulker) {
                     contents.add(GiftEconomy.Gift.whoPaidListItemStack.get(p.getUniqueId()));
+
                     break;
                 }
             }
@@ -35,41 +39,70 @@ public class Gift {
 
         ItemStack gift = addGiftContents(contents, giftAppearance);
 
-        Variables.GiftMap.temporary.remove(p.getUniqueId());
-
         if (p.getInventory().firstEmpty() == -1) {
             p.getWorld().dropItem(p.getLocation(), gift);
         } else {
             p.getInventory().addItem(gift);
         }
+
+        Variables.GiftMap.temporary.remove(p.getUniqueId());
+
+        GiftEconomy.Gift.whoPaidListItemStack.remove(p.getUniqueId());
     }
 
     public static void open(Player p) {
+        if (!isPlayerHoldingGift(p)) {
+            return;
+        }
+
+        List<ItemStack> items = new ArrayList<>();
+
         try {
             NamespacedKey namespacedKey = new NamespacedKey(plugin, "contents");
 
-            List<ItemStack> items = Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(p.getInventory().getItemInMainHand()).getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataItemStackArray.type));
+            String contents = Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(p.getInventory().getItemInMainHand()).getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING));
 
-            p.getInventory().remove(p.getInventory().getItemInMainHand());
+            YamlConfiguration restoreConfig = new YamlConfiguration();
+            restoreConfig.loadFromString(contents);
 
-            items.forEach(item -> {
-                if (p.getInventory().firstEmpty() == -1) {
-                    p.getWorld().dropItem(p.getLocation(), item);
-                } else {
-                    p.getInventory().addItem(item);
-                }
-            });
+            //noinspection unchecked
+            items = (List<ItemStack>) restoreConfig.get("contents");
         } catch (NullPointerException ignored) {
+        } catch (InvalidConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+
+        p.getInventory().remove(p.getInventory().getItemInMainHand());
+
+        assert items != null;
+
+        for (ItemStack item : items) {
+            if (item == null) {
+                continue;
+            }
+            if (p.getInventory().firstEmpty() == -1) {
+                p.getWorld().dropItem(p.getLocation(), item);
+            } else {
+                p.getInventory().addItem(item);
+            }
         }
     }
 
     private static ItemStack addGiftContents(List<ItemStack> items, ItemStack gift) {
         ItemMeta meta = gift.getItemMeta();
 
-        NamespacedKey namespacedKey = new NamespacedKey(plugin, "contents");
+        YamlConfiguration itemConfig = new YamlConfiguration();
+        itemConfig.set("contents", items);
+
+        String contents = itemConfig.saveToString();
 
         assert meta != null;
-        meta.getPersistentDataContainer().set(namespacedKey, PersistentDataItemStackArray.type, items);
+        try {
+            NamespacedKey namespacedKey = new NamespacedKey(plugin, "contents");
+
+            meta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.STRING, contents);
+        } catch (NullPointerException ignored) {
+        }
 
         gift.setItemMeta(meta);
 

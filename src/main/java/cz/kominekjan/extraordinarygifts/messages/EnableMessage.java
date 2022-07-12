@@ -2,7 +2,7 @@ package cz.kominekjan.extraordinarygifts.messages;
 
 import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.logger;
 
-public class Enable {
+public class EnableMessage {
     public static void starting() {
         logger.info("ExtraordinaryGifts: are starting");
     }

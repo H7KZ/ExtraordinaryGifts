@@ -22,6 +22,7 @@ public class Item extends ItemStack {
         NamespacedKey namespacedKey = new NamespacedKey(plugin, key);
 
         assert meta != null;
+
         meta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.STRING, value);
 
         item.setItemMeta(meta);
@@ -31,7 +32,9 @@ public class Item extends ItemStack {
 
     private static ItemStack createItemStack(Material material, String name, List<String> lore, Boolean enchant) {
         ItemStack item = new ItemStack(material);
+
         ItemMeta meta = item.getItemMeta();
+
         assert meta != null;
 
         meta.setDisplayName(name);
@@ -46,10 +49,12 @@ public class Item extends ItemStack {
 
         if (enchant) {
             meta.addEnchant(Enchantment.LUCK, 1, false);
+
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
 
         meta.setLore(lore);
+
         item.setItemMeta(meta);
 
         return item;

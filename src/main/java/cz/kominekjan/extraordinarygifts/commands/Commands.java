@@ -1,7 +1,7 @@
 package cz.kominekjan.extraordinarygifts.commands;
 
 import cz.kominekjan.extraordinarygifts.commands.all.*;
-import org.bukkit.ChatColor;
+import cz.kominekjan.extraordinarygifts.messages.PlayerMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,15 +9,15 @@ import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
-import static cz.kominekjan.extraordinarygifts.messages.Errors.notEnoughArgs;
-import static cz.kominekjan.extraordinarygifts.messages.Errors.youMustBeAPlayer;
+import static cz.kominekjan.extraordinarygifts.messages.ErrorMessage.notEnoughArgs;
+import static cz.kominekjan.extraordinarygifts.messages.ErrorMessage.youMustBeAPlayer;
 import static cz.kominekjan.extraordinarygifts.variables.Variables.Commands.commandNameList;
 import static cz.kominekjan.extraordinarygifts.variables.Variables.Permissions.*;
 
 @SuppressWarnings("NullableProblems")
 public class Commands implements CommandExecutor {
     private static void noPermission(Player p) {
-        p.sendMessage(ChatColor.RED + "eGifts: You don't have permission to use this command!");
+        p.sendMessage(PlayerMessage.eGiftsCommandNoPermission);
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -36,30 +36,35 @@ public class Commands implements CommandExecutor {
             } else {
                 sender.sendMessage("eGifts: Not enough arguments!");
             }
+
             return true;
         }
 
         if (Objects.equals(args[0], ReloadCommand.commandName)) {
             if (sender.hasPermission(reloadCommandPermission) || sender.hasPermission(allCommandsWithReloadPermission)) {
-                if (sender instanceof Player)
-                    sender.sendMessage(ChatColor.YELLOW + "eGifts: Reloading...");
+                if (sender instanceof Player) sender.sendMessage(PlayerMessage.eGiftsReloading);
+
                 ReloadCommand.command();
-                if (sender instanceof Player)
-                    sender.sendMessage(ChatColor.GREEN + "eGifts: Successfully reloaded");
+
+                if (sender instanceof Player) sender.sendMessage(PlayerMessage.eGiftsReloaded);
+
             } else {
-                sender.sendMessage(ChatColor.RED + "eGifts: You don't have permission to use this command!");
+                sender.sendMessage("eGifts: You don't have permission to use this command!");
             }
+
             return true;
         }
 
 
         if (!(sender instanceof Player p)) {
             youMustBeAPlayer(sender);
+
             return true;
         }
 
         if (args.length == 0) {
             notEnoughArgs(p, commandNameList);
+
             return true;
         }
 
@@ -106,7 +111,7 @@ public class Commands implements CommandExecutor {
                     noPermission(p);
                 }
             }
-            default -> p.sendMessage(ChatColor.RED + "eGifts: Unknown arguments! Please use /egifts help");
+            default -> p.sendMessage(PlayerMessage.eGiftsUnknownCommand);
         }
 
         return true;

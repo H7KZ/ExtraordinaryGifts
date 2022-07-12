@@ -1,7 +1,7 @@
 package cz.kominekjan.extraordinarygifts.guis;
 
 import cz.kominekjan.extraordinarygifts.items.Items;
-import cz.kominekjan.extraordinarygifts.messages.Errors;
+import cz.kominekjan.extraordinarygifts.messages.ErrorMessage;
 import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
@@ -21,13 +21,14 @@ public class GiftMenu implements InventoryHolder {
         } else if (invSize <= 18 && invSize > 0) {
             correctInvSize = 18;
         } else if (invSize < 1 || invSize > 27) {
-            Errors.invalidGiftInvSize();
+            ErrorMessage.invalidGiftInvSize();
             invSize = 27;
         }
 
         int fullInvSize = correctInvSize + 9;
 
         giftMenuInv = Bukkit.createInventory(this, fullInvSize, Variables.GiftMenu.title);
+
         initialize(invSize, correctInvSize, fullInvSize);
     }
 

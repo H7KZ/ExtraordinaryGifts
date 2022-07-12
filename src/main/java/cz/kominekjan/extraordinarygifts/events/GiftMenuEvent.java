@@ -22,11 +22,13 @@ import static cz.kominekjan.extraordinarygifts.ExtraordinaryGifts.plugin;
 import static cz.kominekjan.extraordinarygifts.variables.Variables.GiftMenuEvent.*;
 
 public class GiftMenuEvent implements Listener {
+    private static final String[] bannedItems = {"gift", "accept", "neutral", "cancel"};
+
     private static ArrayList<ItemStack> removeGiftMenuItems(ItemStack[] items) {
         ArrayList<ItemStack> result = new ArrayList<>();
 
         for (ItemStack item : items) {
-            if (Arrays.asList(giftMenuRemoveItems).contains(item) || item == null) {
+            if (IsBannedItem(item)) {
                 continue;
             }
 
@@ -42,8 +44,7 @@ public class GiftMenuEvent implements Listener {
         GiftEconomy.Gift.returnBalance(p);
 
         for (ItemStack item : e.getInventory().getContents()) {
-            //noinspection DuplicatedCode
-            if (Arrays.asList(giftMenuRemoveItems).contains(item) || item == null) {
+            if (IsBannedItem(item)) {
                 continue;
             }
 
@@ -59,13 +60,27 @@ public class GiftMenuEvent implements Listener {
     private static Boolean isGiftEmpty(Inventory inv) {
         ArrayList<ItemStack> items = new ArrayList<>(Arrays.asList(inv.getContents()));
 
-        items.removeIf(item -> Arrays.asList(giftMenuRemoveItems).contains(item) || item == null);
+        items.removeIf(item -> {
+            IsBannedItem(item);
+            return IsBannedItem(item);
+        });
 
         return items.isEmpty();
     }
 
-    private static Boolean isPersistentStringKeyPresent(NamespacedKey key, String valueText, ItemStack item) {
-        return Objects.requireNonNull(Objects.requireNonNull(item.getItemMeta()).getPersistentDataContainer().get(key, PersistentDataType.STRING)).equals(valueText);
+    private static Boolean IsBannedItem(ItemStack item) {
+        for (String bannedItem : bannedItems) {
+            try {
+                NamespacedKey namespacedKey = new NamespacedKey(plugin, bannedItem);
+
+                if (Objects.requireNonNull(Objects.requireNonNull(item.getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals(bannedItem)) {
+                    return true;
+                }
+            } catch (NullPointerException ignored) {
+            }
+        }
+
+        return false;
     }
 
     @EventHandler
@@ -87,19 +102,23 @@ public class GiftMenuEvent implements Listener {
 
         if (giftMenuBanShulkerBoxes && shulkerBoxTags.contains(currentItem.getType())) {
             e.setCancelled(true);
+
             return;
         }
 
         if (giftMenuBannedMaterials != null && giftMenuBannedMaterials.contains(currentItem.getType())) {
             e.setCancelled(true);
+
             return;
         }
 
+        // GIFT
         try {
             NamespacedKey namespacedKey = new NamespacedKey(plugin, "gift");
 
             if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals("gift")) {
                 e.setCancelled(true);
+
                 return;
             }
         } catch (NullPointerException ignored) {
@@ -109,25 +128,29 @@ public class GiftMenuEvent implements Listener {
             return;
         }
 
-        if (Arrays.asList(giftMenuNeutralItems).contains(currentItem)) {
-            NamespacedKey key = new NamespacedKey(plugin, "neutral");
+        // NEUTRAL
+        try {
+            NamespacedKey namespacedKey = new NamespacedKey(plugin, "neutral");
 
-            if (isPersistentStringKeyPresent(key, "neutral", currentItem)) {
+            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals("neutral")) {
                 e.setCancelled(true);
+
                 return;
             }
+        } catch (NullPointerException ignored) {
         }
 
-        if (Arrays.asList(giftMenuAcceptItem).contains(currentItem)) {
-            NamespacedKey key = new NamespacedKey(plugin, "accept");
+        // ACCEPT
+        try {
+            NamespacedKey namespacedKey = new NamespacedKey(plugin, "accept");
 
-            if (isGiftEmpty(e.getInventory())) {
-                e.setCancelled(true);
+            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals("accept")) {
+                if (isGiftEmpty(e.getInventory())) {
+                    e.setCancelled(true);
 
-                return;
-            }
+                    return;
+                }
 
-            if (isPersistentStringKeyPresent(key, "accept", currentItem)) {
                 e.setCancelled(true);
 
                 doNotReceiveItems.put(e.getWhoClicked().getUniqueId(), true);
@@ -137,20 +160,24 @@ public class GiftMenuEvent implements Listener {
                 GiftAppearanceMenu giftAppearanceMenu = new GiftAppearanceMenu();
 
                 e.getWhoClicked().openInventory(giftAppearanceMenu.getInventory());
+
                 return;
             }
+        } catch (NullPointerException ignored) {
         }
 
-        if (Arrays.asList(giftMenuCancelItem).contains(currentItem)) {
-            NamespacedKey key = new NamespacedKey(plugin, "cancel");
+        // CANCEL
+        try {
+            NamespacedKey namespacedKey = new NamespacedKey(plugin, "cancel");
 
-            if (isPersistentStringKeyPresent(key, "cancel", currentItem)) {
+            if (Objects.requireNonNull(Objects.requireNonNull(currentItem.getItemMeta()).getPersistentDataContainer().get(namespacedKey, PersistentDataType.STRING)).equals("cancel")) {
                 e.setCancelled(true);
 
                 receiveItems.put(e.getWhoClicked().getUniqueId(), true);
 
                 e.getWhoClicked().closeInventory();
             }
+        } catch (NullPointerException ignored) {
         }
     }
 
@@ -166,12 +193,15 @@ public class GiftMenuEvent implements Listener {
 
         if (receiveItems.get(e.getPlayer().getUniqueId()) != null && doNotReceiveItems.get(e.getPlayer().getUniqueId()) == null) {
             receiveItems.remove(e.getPlayer().getUniqueId());
+
             cancel(e);
+
             return;
         }
 
         if (receiveItems.get(e.getPlayer().getUniqueId()) == null && doNotReceiveItems.get(e.getPlayer().getUniqueId()) != null) {
             doNotReceiveItems.remove(e.getPlayer().getUniqueId());
+
             return;
         }
 

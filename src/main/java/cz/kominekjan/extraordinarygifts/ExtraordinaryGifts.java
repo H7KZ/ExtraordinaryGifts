@@ -1,21 +1,19 @@
 package cz.kominekjan.extraordinarygifts;
 
-import cz.kominekjan.extraordinarygifts.economy.GiftEconomy;
+import cz.kominekjan.extraordinarygifts.bstats.Metrics;
 import cz.kominekjan.extraordinarygifts.guis.GiftAppearanceMenu;
 import cz.kominekjan.extraordinarygifts.guis.GiftMenu;
 import cz.kominekjan.extraordinarygifts.initialize.Initialize;
-import cz.kominekjan.extraordinarygifts.messages.Enable;
+import cz.kominekjan.extraordinarygifts.messages.EnableMessage;
 import cz.kominekjan.extraordinarygifts.variables.Variables;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Logger;
 
-import static cz.kominekjan.extraordinarygifts.variables.Variables.GiftMenuEvent.giftMenuRemoveItems;
+import static cz.kominekjan.extraordinarygifts.items.Items.givePlayersItemsBack;
 
 public final class ExtraordinaryGifts extends JavaPlugin {
 
@@ -44,51 +42,16 @@ public final class ExtraordinaryGifts extends JavaPlugin {
         logger.info("ExtraordinaryGifts: All inventories closed!.");
     }
 
-    public static void givePlayersItemsBack(Player p) {
-        GiftEconomy.Gift.returnBalance(p);
-
-        for (ItemStack item : p.getOpenInventory().getTopInventory().getContents()) {
-            //noinspection DuplicatedCode
-            if (Arrays.asList(giftMenuRemoveItems).contains(item) || item == null) {
-                continue;
-            }
-
-            if (p.getInventory().firstEmpty() == -1) {
-                p.getWorld().dropItem(p.getLocation(), item);
-                continue;
-            }
-
-            p.getInventory().addItem(item);
-        }
-    }
-
-    public static void givePlayersItemsBack(ArrayList<ItemStack> items, Player p) {
-        GiftEconomy.Gift.returnBalance(p);
-
-        DropPlayerItems(items, p);
-    }
-
-    public static void DropPlayerItems(ArrayList<ItemStack> items, Player p) {
-        for (ItemStack item : items) {
-            if (p.getInventory().firstEmpty() == -1) {
-                p.getWorld().dropItem(p.getLocation(), item);
-                continue;
-            }
-
-            p.getInventory().addItem(item);
-        }
-
-        Variables.GiftMap.temporary.remove(p.getUniqueId());
-    }
-
     @Override
     public void onEnable() {
         plugin = this;
 
         logger = plugin.getLogger();
 
+        new Metrics(this, 15712);
+
         //STARTING UP
-        Enable.starting();
+        EnableMessage.starting();
 
         //CONFIG FILE LOAD & COPY DEFAULTS
         config = plugin.getConfig();
@@ -108,7 +71,7 @@ public final class ExtraordinaryGifts extends JavaPlugin {
         Initialize.events();
 
         //ENDING OF START
-        Enable.closing();
+        EnableMessage.closing();
     }
 
     @Override
