@@ -1,6 +1,7 @@
 package cz.kominekjan.extraordinarygifts.economy;
 
-import cz.kominekjan.extraordinarygifts.variables.Variables;
+import cz.kominekjan.extraordinarygifts.variables.Variables.Economy;
+import cz.kominekjan.extraordinarygifts.variables.Variables.GiftMenuEvent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,15 +15,15 @@ public class GiftEconomy {
         public static final HashMap<UUID, ItemStack> whoPaidListItemStack = new HashMap<>();
 
         public static Boolean checkBalance(ItemStack itemInMainHand) {
-            if (Variables.Economy.Gift.useShulkerBox) {
-                for (Material shulker : Variables.GiftMenuEvent.shulkerBoxTags) {
+            if (Economy.Gift.useShulkerBox) {
+                for (Material shulker : GiftMenuEvent.shulkerBoxTags) {
                     if (itemInMainHand.getType() == shulker) {
                         return true;
                     }
                 }
             }
 
-            for (LinkedHashMap<String, String> method : Variables.Economy.Gift.possiblePaymentMethods) {
+            for (LinkedHashMap<String, String> method : Economy.Gift.possiblePaymentMethods) {
                 if (checkIfHasEnoughBalance(itemInMainHand, method)) {
                     return true;
                 }
@@ -31,8 +32,8 @@ public class GiftEconomy {
         }
 
         public static void payBalance(Player p, ItemStack itemInMainHand) {
-            if (Variables.Economy.Gift.useShulkerBox) {
-                for (Material shulker : Variables.GiftMenuEvent.shulkerBoxTags) {
+            if (Economy.Gift.useShulkerBox) {
+                for (Material shulker : GiftMenuEvent.shulkerBoxTags) {
                     if (itemInMainHand.getType() == shulker) {
                         whoPaidListItemStack.put(p.getUniqueId(), itemInMainHand);
 
@@ -43,7 +44,7 @@ public class GiftEconomy {
                 }
             }
 
-            for (LinkedHashMap<String, String> method : Variables.Economy.Gift.possiblePaymentMethods) {
+            for (LinkedHashMap<String, String> method : Economy.Gift.possiblePaymentMethods) {
                 if (checkIfHasEnoughBalance(itemInMainHand, method)) {
                     itemInMainHand.setAmount(itemInMainHand.getAmount() - Integer.parseInt(method.get("amount")));
 
@@ -58,6 +59,7 @@ public class GiftEconomy {
 
         public static void returnBalance(Player p) {
             ItemStack balance = whoPaidListItemStack.get(p.getUniqueId());
+
             if (balance == null) {
                 return;
             }
@@ -68,6 +70,7 @@ public class GiftEconomy {
 
                 return;
             }
+
             p.getInventory().addItem(balance);
         }
 

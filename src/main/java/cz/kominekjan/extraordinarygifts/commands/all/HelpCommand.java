@@ -5,8 +5,7 @@ import org.bukkit.entity.Player;
 
 import static cz.kominekjan.extraordinarygifts.messages.HelpMessage.contentsWithReload;
 import static cz.kominekjan.extraordinarygifts.messages.HelpMessage.contentsWithoutReload;
-import static cz.kominekjan.extraordinarygifts.variables.Variables.Permissions.allCommandsWithReloadPermission;
-import static cz.kominekjan.extraordinarygifts.variables.Variables.Permissions.reloadCommandPermission;
+import static cz.kominekjan.extraordinarygifts.permissions.Permissions.*;
 
 public class HelpCommand {
     public static final String commandName = "help";
@@ -24,6 +23,10 @@ public class HelpCommand {
     }
 
     public static void command(Player p) {
+        if (!CheckPermissionAllWithoutReload(p, helpCommandPermission)) {
+            return;
+        }
+
         p.sendMessage(PlayerMessage.helpCommandDefaultWelcome);
 
         sendPlayerHelp(p);

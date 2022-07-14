@@ -92,19 +92,6 @@ public class Variables {
         public static final String[] commandNameList = {"help", "create", "open", "economy", "title", "message"};
     }
 
-    public static class Permissions {
-        public static final String createCommandPermission = "extraordinarygifts.gift.create";
-        public static final String openCommandPermission = "extraordinarygifts.gift.open";
-        public static final String titleCommandPermission = "extraordinarygifts.gift.title";
-        public static final String messageCommandPermission = "extraordinarygifts.gift.message";
-        public static final String reloadCommandPermission = "extraordinarygifts.plugin.reload";
-        public static final String helpCommandPermission = "extraordinarygifts.command.help";
-        public static final String economyCommandPermission = "extraordinarygifts.command.economy";
-        public static final String eGiftCommandPermission = "extraordinarygifts.command.egift";
-        public static final String allCommandsWithoutReloadPermission = "extraordinarygifts.command.allCommandsWithoutReload";
-        public static final String allCommandsWithReloadPermission = "extraordinarygifts.command.allCommandsWithReload";
-    }
-
     public static class GiftMenu {
         public static String title;
         public static int size;

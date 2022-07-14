@@ -1,7 +1,7 @@
 package cz.kominekjan.extraordinarygifts.items;
 
 import cz.kominekjan.extraordinarygifts.economy.GiftEconomy;
-import cz.kominekjan.extraordinarygifts.variables.Variables;
+import cz.kominekjan.extraordinarygifts.variables.Variables.GiftMap;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -74,7 +74,7 @@ public class Items {
             p.getInventory().addItem(item);
         }
 
-        Variables.GiftMap.temporary.remove(p.getUniqueId());
+        GiftMap.temporary.remove(p.getUniqueId());
     }
 
     private static void initGiftMenuNeutral() {

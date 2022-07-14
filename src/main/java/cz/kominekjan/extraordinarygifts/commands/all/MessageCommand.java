@@ -5,6 +5,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
+import static cz.kominekjan.extraordinarygifts.permissions.Permissions.CheckPermissionAllWithoutReload;
+import static cz.kominekjan.extraordinarygifts.permissions.Permissions.messageCommandPermission;
 import static cz.kominekjan.extraordinarygifts.validateAndFormat.MessageFormat.getFormattedMessage;
 import static cz.kominekjan.extraordinarygifts.validateAndFormat.TitleMessageValidate.isPlayerHoldingGift;
 import static cz.kominekjan.extraordinarygifts.validateAndFormat.TitleMessageValidate.validateMessage;
@@ -13,6 +15,10 @@ public class MessageCommand {
     public static final String commandName = "message";
 
     public static void command(Player p, String[] args) {
+        if (!CheckPermissionAllWithoutReload(p, messageCommandPermission)) {
+            return;
+        }
+
         if (!isPlayerHoldingGift(p)) {
             return;
         }

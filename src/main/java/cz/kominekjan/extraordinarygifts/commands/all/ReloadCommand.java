@@ -1,9 +1,10 @@
 package cz.kominekjan.extraordinarygifts.commands.all;
 
 import cz.kominekjan.extraordinarygifts.economy.GiftEconomy;
-import cz.kominekjan.extraordinarygifts.initialize.Deinitialize;
 import cz.kominekjan.extraordinarygifts.initialize.Initialize;
-import cz.kominekjan.extraordinarygifts.variables.Variables;
+import cz.kominekjan.extraordinarygifts.variables.Variables.GiftAppearanceMenuEvent;
+import cz.kominekjan.extraordinarygifts.variables.Variables.GiftMap;
+import cz.kominekjan.extraordinarygifts.variables.Variables.GiftMenuEvent;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -28,18 +29,16 @@ public class ReloadCommand {
         plugin.saveDefaultConfig();
 
         logger.info("ExtraordinaryGifts: ReInitializing Variables");
-        Deinitialize.variables();
         Initialize.variables();
 
         logger.info("ExtraordinaryGifts: ReInitializing.");
         logger.info("ExtraordinaryGifts: ReInitializing Items");
-        Deinitialize.items();
         Initialize.items();
 
         logger.info("ExtraordinaryGifts: Clearing temporary gifts.");
-        Variables.GiftMap.temporary.clear();
-        Variables.GiftMenuEvent.receiveItems.clear();
-        Variables.GiftAppearanceMenuEvent.receiveItems.clear();
+        GiftMap.temporary.clear();
+        GiftMenuEvent.receiveItems.clear();
+        GiftAppearanceMenuEvent.receiveItems.clear();
         GiftEconomy.Gift.whoPaidListItemStack.clear();
 
         logger.info("ExtraordinaryGifts: Reloaded!");

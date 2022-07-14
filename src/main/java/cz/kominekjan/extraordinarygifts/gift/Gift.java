@@ -2,7 +2,9 @@ package cz.kominekjan.extraordinarygifts.gift;
 
 
 import cz.kominekjan.extraordinarygifts.economy.GiftEconomy;
-import cz.kominekjan.extraordinarygifts.variables.Variables;
+import cz.kominekjan.extraordinarygifts.variables.Variables.Economy;
+import cz.kominekjan.extraordinarygifts.variables.Variables.GiftMap;
+import cz.kominekjan.extraordinarygifts.variables.Variables.GiftMenuEvent;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -21,14 +23,14 @@ import static cz.kominekjan.extraordinarygifts.validateAndFormat.TitleMessageVal
 
 public class Gift {
     public static void create(Player p, ItemStack giftAppearance) {
-        ArrayList<ItemStack> contents = Variables.GiftMap.temporary.get(p.getUniqueId());
+        ArrayList<ItemStack> contents = GiftMap.temporary.get(p.getUniqueId());
 
-        if (Variables.Economy.Gift.giveBalanceBack) {
+        if (Economy.Gift.giveBalanceBack) {
             contents.add(GiftEconomy.Gift.whoPaidListItemStack.get(p.getUniqueId()));
-        } else if (Variables.Economy.Gift.giveShulkerBoxBack) {
+        } else if (Economy.Gift.giveShulkerBoxBack) {
             Material ifShulker = GiftEconomy.Gift.whoPaidListItemStack.get(p.getUniqueId()).getType();
 
-            for (Material shulker : Variables.GiftMenuEvent.shulkerBoxTags) {
+            for (Material shulker : GiftMenuEvent.shulkerBoxTags) {
                 if (ifShulker == shulker) {
                     contents.add(GiftEconomy.Gift.whoPaidListItemStack.get(p.getUniqueId()));
 
@@ -45,7 +47,7 @@ public class Gift {
             p.getInventory().addItem(gift);
         }
 
-        Variables.GiftMap.temporary.remove(p.getUniqueId());
+        GiftMap.temporary.remove(p.getUniqueId());
 
         GiftEconomy.Gift.whoPaidListItemStack.remove(p.getUniqueId());
     }

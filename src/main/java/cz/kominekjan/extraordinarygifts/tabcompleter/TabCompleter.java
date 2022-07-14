@@ -1,6 +1,6 @@
 package cz.kominekjan.extraordinarygifts.tabcompleter;
 
-import cz.kominekjan.extraordinarygifts.variables.Variables;
+import cz.kominekjan.extraordinarygifts.variables.Variables.Commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -14,7 +14,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
         List<String> result = new ArrayList<>();
 
         if (strings.length == 1) {
-            for (String cmd : Variables.Commands.commandNameList) {
+            for (String cmd : Commands.commandNameList) {
                 if (cmd.toLowerCase().startsWith(strings[0].toLowerCase())) {
                     result.add(cmd);
                 }
